@@ -1,6 +1,7 @@
 // Packages
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 
 const Signup = props => {
   // Declare and initialize state variables
@@ -79,7 +80,7 @@ const Signup = props => {
           <label>Profile Pic URL:</label>
           <input type="url" name="profileUrl" onChange={e => setProfileUrl(e.target.value)} />
         </div>
-        <button type="submit">Sign Me Up!</button>
+        <Button basic color='purple' type="submit">Sign Me Up!</Button>
       </form>
     </div>
   )
