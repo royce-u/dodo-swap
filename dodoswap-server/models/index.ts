@@ -1,6 +1,6 @@
-let mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mern-sei', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dodo-swap', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true

@@ -1,8 +1,18 @@
-let mongoose = require('mongoose')
-let bcrypt = require('bcryptjs')
+import * as mongoose from 'mongoose'
+import * as bcrypt from 'bcryptjs'
 
-// TODO: Create user schema
-let userSchema = new mongoose.Schema({
+// Create User interface extending mongoose.Document (which includes ._id)
+export default interface User extends mongoose.Document {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    pic: string; 
+    validPassword(user: User, password: string): boolean;
+}
+
+//Create user schema
+let userSchema: mongoose.Schema = new mongoose.Schema({
     firstname: {
         type: String,
         required: true
@@ -19,14 +29,10 @@ let userSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     },
-    pic: String,
-    admin: {
-        type: Boolean,
-        default: false
-    }
+    pic: String
 })
 //hash the passwords
-userSchema.pre('save', function(done) {
+userSchema.pre('save', function(this: User, done) {
     //only hash it if it's a new password, not if it's modified this refers to the userObject(schema)
     if(this.isNew) {
         this.password = bcrypt.hashSync(this.password, 12)
@@ -38,7 +44,7 @@ userSchema.pre('save', function(done) {
 
 //Make a JSON representation of the user (for sending on the JWT payload)
 userSchema.set('toJSON', {
-    transform: (doc, user) => {
+    transform: (doc, user: User) => {
         delete user.password
         delete user.__v 
         return user
@@ -46,11 +52,12 @@ userSchema.set('toJSON', {
 })
 
 //Make a function that compares passwords
-userSchema.methods.validPassword = function(typedPassword) {
+userSchema.methods.validPassword = function(user: User, typedPassword: string): boolean {
     //typedPassword: plain text, just typed in by user
     //this.password: existing, hashed password
-    return bcrypt.compareSync(typedPassword, this.password)
+    return bcrypt.compareSync(typedPassword, user.password)
 }
 
-// TODO: Export user model
-module.exports = mongoose.model('User', userSchema)
+// Create model with type user and export user model
+let User: mongoose.Model<User> = mongoose.model<User>('User', userSchema)
+module.exports = User
