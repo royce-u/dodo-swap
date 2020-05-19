@@ -21,6 +21,7 @@ app.use(cors()) //Add react app as origin for CORS
 // Routes
 app.use('/auth', require('./controllers/auth'))
 app.use('/profile', expressJwt({secret: process.env.JWT_SECRET}), require('./controllers/profile'))
+app.use('/user', require('./controllers/user'))
 
 app.get('*', (req: Request, res: Response) => {
   res.status(404).send({ message: 'Not Found' })

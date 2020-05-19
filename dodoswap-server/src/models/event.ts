@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose'
-import Item from '../models/item'
+import Item from './item'
 
 
 // Create Event interface extending mongoose.Document (which includes ._id)

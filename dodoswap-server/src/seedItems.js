@@ -1,6 +1,5 @@
-const db = require('./models')
-
-db.Item.insertMany([
+var Item = require('./models/item');
+Item.insertMany([
     {
         "acid": "J4inuBziPCSGZNEPM",
         "name": "air circulator",
@@ -14921,4 +14920,4 @@ db.Item.insertMany([
         "sell": 125,
         "tag": "Chair"
     }
-])
+]);

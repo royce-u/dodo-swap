@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose'
 
-
 //Create Rating interface extending mongoose.Document (which includes ._id)
 export default interface Rating extends mongoose.Document {
     ratedUserId: string;
