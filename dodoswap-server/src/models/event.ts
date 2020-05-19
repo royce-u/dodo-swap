@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose'
-import Item from './item'
+import Item, {ItemInterface} from './item'
 
 
 // Create Event interface extending mongoose.Document (which includes ._id)
@@ -8,8 +8,8 @@ export default interface Event extends mongoose.Document {
     private: boolean;
     attendees: {
         attendeeId: string,
-        top5: Item[],
-        toBring: Item[]
+        top5: ItemInterface[],
+        toBring: ItemInterface[]
     };
     date: Date;
     time: string; 

@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 
 //Create Item interface extending mongoose.Document (which includes ._id)
-export default interface Item extends mongoose.Document {
+export interface ItemInterface extends mongoose.Document {
     acID: string;
     name: string;
     variation: string;
@@ -21,5 +21,4 @@ let itemSchema: mongoose.Schema = new mongoose.Schema({
     tag: String
 })
 //create model with type item and export item model
-let Item: mongoose.Model<Item> = mongoose.model<Item>('Item', itemSchema)
-module.exports = Item
+export default mongoose.model<ItemInterface>('Item', itemSchema)

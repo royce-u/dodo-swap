@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import * as bcrypt from 'bcryptjs'
 
-import Item from './item'
+import Item, {ItemInterface} from './item'
 import Event from './event'
 import Rating from './rating'
 
@@ -17,8 +17,8 @@ export default interface User extends mongoose.Document {
     nativeFruit: string;
     pic: string; 
     ratings: Rating[];
-    inventory: Item[];
-    wishList: Item[];
+    inventory: ItemInterface[];
+    wishList: ItemInterface[];
     friends: User[];
     events: Event[];
     validPassword(user: User, password: string): boolean;

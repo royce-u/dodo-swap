@@ -1,14 +1,13 @@
-let db = require('../models')
-
 import { Request, Response, Router } from 'express'
-import Item from '../models/item'
-
+import {ItemInterface} from '../models/item'
+let db = require('../models')
 const router = Router()
 
 //GET / Displays index of all items in catalogue
 router.get('/', (req: Request, res: Response) => {
+    console.log("DB ITEM----", db.Item)
     db.Item.find()
-    .then((items: Item) => {
+    .then((items: ItemInterface[]) => {
         console.log("ITEMS HEREEEE---", items)
         res.send({items})
     })
@@ -20,8 +19,9 @@ router.get('/', (req: Request, res: Response) => {
 
 //GET - Display show page for a single item
 router.get('/:id', (req: Request, res: Response) => {
-    db.Item.findById(req.params.id)
-    .then((item: Item)=> {
+    console.log("HHHHHEREEE-", (req.params as {id: string}).id)
+    db.Item.findById((req.params as {id: string}).id)
+    .then((item: ItemInterface | null)=> {
         console.log("item returned--", item)
         res.send({item})
     })
