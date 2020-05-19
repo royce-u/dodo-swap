@@ -2,11 +2,11 @@
   "name": "dodo-swap-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm i && node build/index.js",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' index.ts"
   },
   "keywords": [],
   "author": "",

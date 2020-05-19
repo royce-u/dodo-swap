@@ -47,7 +47,7 @@ router.post('/signup', (req: Request, res: Response) => {
  const email = (req.body as {email: string}).email
 
   //Look up the user by email to make sure they are "new"
-  db.User.findOne( {email: email})
+  db.User.findOne({email: email})
   .then((user: User) => {
     //if user exists already then do NOT let them create another account
     if (user) {

@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose'
 import * as bcrypt from 'bcryptjs'
 
-import Item from '../models/item'
-import Event from '../models/event'
-import Rating from '../models/rating'
+import Item from './item'
+import Event from './event'
+import Rating from './rating'
 
 
 // Create User interface extending mongoose.Document (which includes ._id)

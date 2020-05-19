@@ -1,4 +1,4 @@
-let db = require('../models')
+let Item = require('../models/item')
 
 
 import { Request, Response, Router } from 'express'
@@ -12,18 +12,6 @@ router.get('/', (req: Request, res: Response) => {
     console.log('catalogue')
     res.send({message: 'catalogue index'})
 })
-
-// router.post('/', (req: Request, res: Response) => {
-//     console.log(req.body)
-//     db.item.create(req.body)
-//     .then((blah: {}) => {
-//         res.send(blah)
-//     })
-//     .catch((err: string) => {
-//         console.log(err, 'some shit broke')
-//         res.send(err,)
-//     })
-// })
 
 //GET - Display show page for a single item
 router.get('/:id', (req: Request, res: Response) => {

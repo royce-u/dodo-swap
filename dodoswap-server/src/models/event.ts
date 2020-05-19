@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
-import Item from '../models/item'
-import User from '../models/user'
+import Item from './item'
+
 
 // Create Event interface extending mongoose.Document (which includes ._id)
 export default interface Event extends mongoose.Document {

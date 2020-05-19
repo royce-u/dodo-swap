@@ -1,8 +1,6 @@
 import * as mongoose from 'mongoose'
-import User from '../models/user'
-import Event from '../models/event'
 
-//Create Rating interfeace extending mongoose.Document (which includes ._id)
+//Create Rating interface extending mongoose.Document (which includes ._id)
 export default interface Rating extends mongoose.Document {
     ratedUserId: string;
     eventDate: Date;
