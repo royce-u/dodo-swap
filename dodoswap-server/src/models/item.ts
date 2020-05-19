@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose'
 
 //Create Item interface extending mongoose.Document (which includes ._id)
 export default interface Item extends mongoose.Document {
-    acID: number;
+    acID: string;
     name: string;
     variation: string;
     image: string;

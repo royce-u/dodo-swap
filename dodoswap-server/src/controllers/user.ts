@@ -3,7 +3,6 @@ let db = require('../models')
 import { Request, Response, Router } from 'express'
 import User from '../models/user'
 
-
 const router = Router()
 
 //GET /user/:id (display a single user)
@@ -12,6 +11,10 @@ router.get('/:id', (req: Request, res: Response) => {
     db.User.findById({_id: (req.params as {id: string}).id})
     .then((user: User) => {
         res.send({user})
+    })
+    .catch((err: Error) => {
+        console.log("error in finding user", err)
+        res.send({err})
     })
 })
 
