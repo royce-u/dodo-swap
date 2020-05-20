@@ -1,13 +1,13 @@
 import * as mongoose from 'mongoose'
 import * as bcrypt from 'bcryptjs'
 
-import Item, {ItemInterface} from './item'
-import Event from './event'
-import Rating from './rating'
+import {ItemInterface} from './item'
+import {EventInterface} from './event'
+import {RatingInterface} from './rating'
 
 
 // Create User interface extending mongoose.Document (which includes ._id)
-export default interface User extends mongoose.Document {
+export interface UserInterface extends mongoose.Document {
     firstname: string;
     lastname: string;
     email: string;
@@ -16,12 +16,12 @@ export default interface User extends mongoose.Document {
     islandName: string;
     nativeFruit: string;
     pic: string; 
-    ratings: Rating[];
+    ratings: RatingInterface[];
     inventory: ItemInterface[];
     wishList: ItemInterface[];
-    friends: User[];
-    events: Event[];
-    validPassword(user: User, password: string): boolean;
+    friends: UserInterface[];
+    events: EventInterface[];
+    validPassword(user: UserInterface, password: string): boolean;
 }
 
 //Create user schema
@@ -55,7 +55,7 @@ let userSchema: mongoose.Schema = new mongoose.Schema({
 
 })
 //hash the passwords
-userSchema.pre('save', function(this: User, done) {
+userSchema.pre('save', function(this: UserInterface, done) {
     //only hash it if it's a new password, not if it's modified this refers to the userObject(schema)
     if(this.isNew) {
         this.password = bcrypt.hashSync(this.password, 12)
@@ -67,7 +67,7 @@ userSchema.pre('save', function(this: User, done) {
 
 //Make a JSON representation of the user (for sending on the JWT payload)
 userSchema.set('toJSON', {
-    transform: (doc, user: User) => {
+    transform: (doc, user: UserInterface) => {
         delete user.password
         delete user.__v 
         return user
@@ -75,12 +75,11 @@ userSchema.set('toJSON', {
 })
 
 //Make a function that compares passwords
-userSchema.methods.validPassword = function(user: User, typedPassword: string): boolean {
+userSchema.methods.validPassword = function(user: UserInterface, typedPassword: string): boolean {
     //typedPassword: plain text, just typed in by user
     //this.password: existing, hashed password
     return bcrypt.compareSync(typedPassword, user.password)
 }
 
 // Create model with type user and export user model
-let User: mongoose.Model<User> = mongoose.model<User>('User', userSchema)
-module.exports = User
+export default mongoose.model<UserInterface>('User', userSchema)

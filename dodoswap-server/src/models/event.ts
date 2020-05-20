@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose'
-import Item, {ItemInterface} from './item'
+import {ItemInterface} from './item'
 
 
 // Create Event interface extending mongoose.Document (which includes ._id)
-export default interface Event extends mongoose.Document {
+export interface EventInterface extends mongoose.Document {
     hostId: string;
     private: boolean;
     attendees: {
@@ -58,5 +58,4 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
 
 
 // Create model with type event and export event model
-let Event: mongoose.Model<Event> = mongoose.model<Event>('Event', eventSchema)
-module.exports = Event
+export default mongoose.model<EventInterface>('Event', eventSchema)

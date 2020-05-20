@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 
 //Create Rating interface extending mongoose.Document (which includes ._id)
-export default interface Rating extends mongoose.Document {
+export interface RatingInterface extends mongoose.Document {
     ratedUserId: string;
     eventDate: Date;
     score: number;
@@ -26,5 +26,4 @@ let ratingSchema: mongoose.Schema = new mongoose.Schema({
 })
 
 //create model with type rating and export rating model
-let Rating: mongoose.Model<Rating> = mongoose.model<Rating>('Rating', ratingSchema)
-module.exports = Rating
+export default mongoose.model<RatingInterface>('Rating', ratingSchema)

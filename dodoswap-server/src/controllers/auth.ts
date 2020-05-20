@@ -4,7 +4,7 @@ let db = require('../models')
 let jwt = require('jsonwebtoken')
 
 import { Request, Response, Router } from 'express'
-import User from '../models/user'
+import User, { UserInterface } from '../models/user'
 
 const router = Router()
 
@@ -17,7 +17,7 @@ router.post('/login', (req: Request, res: Response) => {
 
   //Look up the user by email to make sure they are "new"
   db.User.findOne({ email: email })
-  .then((user: User) => {
+  .then((user: UserInterface) => {
     //check if user exists
     if (!user) {
       //They don't have an account, send error message
@@ -48,7 +48,7 @@ router.post('/signup', (req: Request, res: Response) => {
 
   //Look up the user by email to make sure they are "new"
   db.User.findOne({email: email})
-  .then((user: User) => {
+  .then((user: UserInterface) => {
     //if user exists already then do NOT let them create another account
     if (user) {
       //nono! sign in instead
@@ -56,7 +56,7 @@ router.post('/signup', (req: Request, res: Response) => {
     }
     //we know the user is legitimately a new user: CREATE A NEW ACCOUNT
     db.User.create(req.body) 
-      .then((newUser: User) => {
+      .then((newUser: UserInterface) => {
         //Yay! Things worked and user exists now. create a token for the new user
         let token: string = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET, {
           expiresIn: 120 //60 * 60 * 8 //8 hours, in seconds
