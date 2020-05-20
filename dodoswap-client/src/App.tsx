@@ -7,9 +7,10 @@ import jwtDecode from 'jwt-decode'
 // Resources and custom components
 import './App.css';
 import Content from './content/Content'
-// import Footer from './nav/Footer'
-import Header from './nav/Header'
+import Footer from './nav/Footer'
+
 import Nav from './nav/Nav'
+
 
 export interface User {
   firstname: string;
@@ -87,11 +88,12 @@ const App: React.FC = () => {
     <Router>
       <div className="App">
         <Nav user={user} updateToken={updateToken}/>
-        <Header />
+        
         <main>
           <Content user={user} updateToken={updateToken} />
+          
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
 
     </Router>

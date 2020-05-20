@@ -5,17 +5,18 @@ const Nav = props => {
   const handleLogout = e => {
     e.preventDefault()
     // Remove the token from localstorage (or cookies)
-    props.updateToken()
+    props.updateToken('')
+    localStorage.removeItem('boilerToken')
     // TODO: Update the state of the App
   }
 
   let links = (
     <span>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="auth/login">Login</Link>
       </li>
       <li>
-        <Link to="/signup">Signup</Link>
+        <Link to="auth/signup">Signup</Link>
       </li>
     </span>
   )
@@ -25,7 +26,7 @@ const Nav = props => {
     links = (
       <span>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/user">Profile</Link>
         </li>
         <li>
           <a href="/" onClick={handleLogout}>Logout</a>

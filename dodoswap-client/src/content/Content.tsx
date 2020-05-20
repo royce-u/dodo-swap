@@ -7,7 +7,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Signup from './pages/Signup'
-import Catalogue from './pages/catalogue'
+import Catalogue from './pages/Catalogue'
 import { Decoded, User } from '../App'
 
 //props
@@ -21,13 +21,13 @@ const Content: React.FC<ContentProps> = props => {
   return (
     <div className="container">
       <Route exact path="/" component={Home} />
-      <Route path="/login" render={
+      <Route path="/auth/login" render={
         () => <Login user={props.user} updateToken={props.updateToken} />
       } />
-      <Route path="/profile" render={
+      <Route path="/user" render={
         () => <Profile user={props.user} />
       } />
-      <Route path="/signup" render={
+      <Route path="/auth/signup" render={
         () => <Signup user={props.user} updateToken={props.updateToken} />
       } />
       <Route path="/catalogue" render={
