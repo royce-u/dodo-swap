@@ -58,7 +58,7 @@ const Login:React.FC<LoginProps> = props => {
   
   //Check if there is a user and redirect them to their profile
   if (props.user) {
-    return <Redirect to="/profile" />
+    return <Redirect to="/user" />
   }
 
   return (
