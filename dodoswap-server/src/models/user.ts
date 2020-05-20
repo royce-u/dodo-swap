@@ -70,6 +70,11 @@ userSchema.set('toJSON', {
     transform: (doc, user: UserInterface) => {
         delete user.password
         delete user.__v 
+        delete user.wishList
+        delete user.friends
+        delete user.inventory
+        delete user.events
+        delete user.ratings
         return user
     }
 })
