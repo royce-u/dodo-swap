@@ -1,0 +1,17 @@
+
+body {
+    background-color: rgb(24,167,224);
+    color: white;
+  }
+
+
+nav {
+    background-color: white;
+}
+.center-form {
+    padding-top: 10%;
+    height: 80vh;
+}
+.signup {
+    color: white;
+}

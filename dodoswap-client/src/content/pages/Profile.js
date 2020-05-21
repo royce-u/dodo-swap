@@ -40,6 +40,7 @@ const Profile = props => {
 
   return (
     <div>
+      <h1>PROFILE PAGE</h1>
       <h2>{props.user.firstname}</h2>
       <img src={props.user.pic} alt={props.user.firstname}/>
       <p>{secretMessage}</p>

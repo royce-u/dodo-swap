@@ -9,7 +9,6 @@ import './App.css';
 import Content from './content/Content'
 import Footer from './nav/Footer'
 
-import Nav from './nav/Nav'
 
 
 export interface User {
@@ -86,13 +85,8 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="App">
-        <Nav user={user} updateToken={updateToken}/>
-        
-        <main>
-          <Content user={user} updateToken={updateToken} />
-          
-        </main>
+      <div className="App">   
+        <Content user={user} updateToken={updateToken} />         
         <Footer />
       </div>
 

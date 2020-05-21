@@ -4,9 +4,8 @@ import { Route } from 'react-router-dom'
 
 // Custom components
 import Home from './pages/Home'
-import Login from './pages/Login'
+import Nav from '../nav/Nav'
 import Profile from './pages/Profile'
-import Signup from './pages/Signup'
 import Catalogue from './pages/Catalogue'
 import { Decoded, User } from '../App'
 
@@ -20,15 +19,10 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = props => {
   return (
     <div className="container">
+      <Nav user={props.user} updateToken={props.updateToken}/>
       <Route exact path="/" component={Home} />
-      <Route path="/auth/login" render={
-        () => <Login user={props.user} updateToken={props.updateToken} />
-      } />
       <Route path="/user" render={
         () => <Profile user={props.user} />
-      } />
-      <Route path="/auth/signup" render={
-        () => <Signup user={props.user} updateToken={props.updateToken} />
       } />
       <Route path="/catalogue" render={
         () => <Catalogue updateToken={props.updateToken} user={props.user}/>
