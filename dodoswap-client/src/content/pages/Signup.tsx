@@ -1,8 +1,8 @@
 // Packages
 import React, { FormEvent, useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { Button, Container, Form, Grid, Image, Input } from 'semantic-ui-react'
-import { Decoded } from '../../App'
+import { Button, Container, Form, Grid, Input } from 'semantic-ui-react'
+import  { Decoded }   from '../../App'
 import { ReactComponent as Logo } from '../../css/assets/logo-square.svg'
 
 interface SignupProps {
@@ -18,7 +18,7 @@ const Signup: React.FC<SignupProps> = props => {
   let [message, setMessage] = React.useState<String>('')
   let [password, setPassword] = React.useState<String>('')
 
-
+  
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     //Send the user sign up data to the server
@@ -50,6 +50,9 @@ const Signup: React.FC<SignupProps> = props => {
             //Giving the token back up to 
             props.updateToken(result.token)
           })
+          .catch(err => {
+            console.log('ERROR in result: ', err)
+          })
       })
       .catch(err => {
         console.log('ERROR SUBMITTING: ', err)
@@ -64,6 +67,7 @@ const Signup: React.FC<SignupProps> = props => {
   return (
 
     <Container className="center-form">
+      
       <Grid columns={2} verticalAlign="middle">
         <Grid.Row>
           <Grid.Column >
@@ -71,6 +75,7 @@ const Signup: React.FC<SignupProps> = props => {
           </Grid.Column>
           <Grid.Column width={2}></Grid.Column>
           <Grid.Column width={6}>
+            <h3>Sign up to find fun and respectful members in our community to have catalogue parties with!</h3>
             <Form onSubmit={handleSubmit} className="signup">
               <span className="red">{message}</span>
               <Form.Group>
@@ -86,11 +91,11 @@ const Signup: React.FC<SignupProps> = props => {
               <Form.Group>
                 <Form.Field>
                   <label>Email</label>
-                <Input type="email" name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                <Input type="email" placeholder="Your email"name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                   <label>Password</label>
-                <Input type="password" name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+                <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
                 </Form.Field>
               </Form.Group>
               <Button type="submit">Sign Me Up!</Button>

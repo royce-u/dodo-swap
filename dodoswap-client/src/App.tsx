@@ -8,6 +8,7 @@ import jwtDecode from 'jwt-decode'
 import './App.css';
 import Content from './content/Content'
 import Footer from './nav/Footer'
+import Nav from './nav/Nav'
 
 
 
@@ -45,6 +46,7 @@ const App: React.FC = () => {
 
   //Function to update user token
   const updateToken = (newToken: string | null) => {
+    console.log("RANDOM UPADTE TOKEN")
     if (newToken){
       //Set the new token into localStorage
       localStorage.setItem('boilerToken' , newToken || '')
@@ -85,7 +87,8 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="App">   
+      <div className="App"> 
+        <Nav user={user} updateToken={updateToken}/>  
         <Content user={user} updateToken={updateToken} />         
         <Footer />
       </div>

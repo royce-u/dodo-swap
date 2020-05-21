@@ -3,11 +3,11 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 // Custom components
-import Home from './pages/Home'
-import Nav from '../nav/Nav'
-import Profile from './pages/Profile'
 import Catalogue from './pages/Catalogue'
-import { Decoded, User } from '../App'
+import Event from './pages/Events'
+import Home from './pages/Home'
+import Profile from './pages/Profile'
+import { Decoded } from '../App'
 
 //props
 interface ContentProps {
@@ -19,13 +19,17 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = props => {
   return (
     <div className="container">
-      <Nav user={props.user} updateToken={props.updateToken}/>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" render={
+        () => <Home updateToken={props.updateToken} user={props.user} />
+      } />
       <Route path="/user" render={
-        () => <Profile user={props.user} />
+        () => <Profile updateToken={props.updateToken} user={props.user} />
       } />
       <Route path="/catalogue" render={
         () => <Catalogue updateToken={props.updateToken} user={props.user}/>
+      } />
+      <Route path="/events" render={
+        () => <Event updateToken={props.updateToken} user={props.user}/>
       } />
 
     </div>

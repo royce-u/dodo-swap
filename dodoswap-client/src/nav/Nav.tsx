@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { Decoded } from '../App'
 import { Menu } from 'semantic-ui-react'
 import Login from '../content/pages/Login'
@@ -18,20 +19,21 @@ const Nav: React.FC<NavProps> = props => {
     
   }
 
-  let links = (
-    <Menu pointing secondary>
+  var links = (
+    <Menu pointing secondary className="top-nav">
         <Menu.Item 
         name='Home' 
-        href="/"
+        as={Link} to= "/"
         />
         <Login user={props.user} updateToken={props.updateToken}/>
     </Menu>
       
 
   )
-
+console.log(props.user)
   // If the user is logged in, show profile page and logout links
   if (props.user) {
+    console.log("INNER PART" )
     links = (
       <Menu pointing secondary>
         <Menu.Item 
@@ -41,25 +43,27 @@ const Nav: React.FC<NavProps> = props => {
       <Menu.Menu position='right'>
       <Menu.Item 
         name='Profile' 
-        href="/user"
+        as={Link} to= "/user"
         />
       <Menu.Item 
         name='Catalogue' 
-        href="/catalogue"
+        as={Link} to= "/catalogue"
         />
       <Menu.Item 
         name='Events' 
-        href="/events"
+        as={Link} to="/events"
         />
       <Menu.Item 
         name='Logout' 
-        href="/"
+        as={Link} to= "/"
         onClick={handleLogout}
         />      
       </Menu.Menu>
     </Menu>
     )
+    
   }
+  console.log("LINKS HERE", links)
 
   return (
     <div>

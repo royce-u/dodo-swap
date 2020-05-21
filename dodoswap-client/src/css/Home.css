@@ -5,8 +5,8 @@ body {
   }
 
 
-nav {
-    background-color: white;
+.top-nav {
+    color: white;
 }
 .center-form {
     padding-top: 10%;

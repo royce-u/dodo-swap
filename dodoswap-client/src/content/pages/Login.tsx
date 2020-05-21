@@ -48,7 +48,6 @@ const Login: React.FC<LoginProps> = props => {
         //we got a good (200) response, we get the token
         response.json()
           .then(result => {
-            console.log("RESULT", result)
             //Giving the token back up to 
             props.updateToken(result.token)
           })
@@ -60,7 +59,7 @@ const Login: React.FC<LoginProps> = props => {
 
   //Check if there is a user and redirect them to their profile
   if (props.user) {
-    return <Redirect to="/user" />
+      return <Redirect to="/user" />
   }
 
   return (
