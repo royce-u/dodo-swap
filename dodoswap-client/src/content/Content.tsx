@@ -31,7 +31,7 @@ const Content: React.FC<ContentProps> = props => {
         () => <Signup user={props.user} updateToken={props.updateToken} />
       } />
       <Route path="/catalogue" render={
-        () => <Catalogue updateToken={props.updateToken} user={props.user}/>
+        () => <Catalogue user={props.user}/>
       } />
 
     </div>
