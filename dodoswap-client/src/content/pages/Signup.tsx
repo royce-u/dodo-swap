@@ -2,7 +2,8 @@
 import React, { FormEvent, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Button, Container, Form, Grid, Image, Input } from 'semantic-ui-react'
-import App, { Decoded } from '../../App'
+import { Decoded } from '../../App'
+import { ReactComponent as Logo } from '../../css/assets/logo-square.svg'
 
 interface SignupProps {
   user: Decoded | null,
@@ -66,7 +67,7 @@ const Signup: React.FC<SignupProps> = props => {
       <Grid columns={2} verticalAlign="middle">
         <Grid.Row>
           <Grid.Column >
-            <Image src="https://external-preview.redd.it/aRKmD70kt1OTGE5q1wAUfxNXNJdo2PUzuccIkRagnEg.png?width=960&crop=smart&auto=webp&s=c19c2fed2c6488291ec8ae179bbd3ef3d6650eb6" />
+            <Logo />
           </Grid.Column>
           <Grid.Column width={2}></Grid.Column>
           <Grid.Column width={6}>
