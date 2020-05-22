@@ -39,7 +39,7 @@ const MyInventory: React.FC<MyInventoryProps> = props => {
     }, [])
 
     if (props.user) {
-        let displayyy = myInv.slice(0, 10).map((m: any) => {
+        let displayyy = myInv.map((m: any) => {
             return (
                 <div key={m._id}>
                     <p>{m.name}</p>
