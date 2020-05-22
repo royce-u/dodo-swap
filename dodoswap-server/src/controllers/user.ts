@@ -41,7 +41,7 @@ router.get('/inventory', (req: RequestInterface, res: Response) => {
             res.send({ err })
         })
 })
-//GET /inventory (display user profile page using token then take the user id and get rest of inventory, wishlist and events data)
+//GET /wishlist (display user profile page using token then take the user id and get rest of inventory, wishlist and events data)
 router.get('/wishlist', (req: RequestInterface, res: Response) => {
     db.User.findOne({_id: (mongoose.Types.ObjectId(req.user ? req.user._id : ""))})
     .populate('wishList')
@@ -88,8 +88,7 @@ router.put('/', (req: Request, res: Response) => {
 
 //PUT /user/wishlist (update user's wishlist)
 router.put('/wishlist', (req: Request, res: Response) => {
-    console.log("REQ BODY----", req.body)
-    console.log(req.body.id)
+    console.log("REQ BODY WISHLIST----", req.body)
     db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
         {$push: {
                 wishList: req.body.wishList
@@ -105,8 +104,8 @@ router.put('/wishlist', (req: Request, res: Response) => {
 })
 //PUT /user/wishlist (update user's wishlist)
 router.put('/inventory', (req: Request, res: Response) => {
-    console.log("REQ BODY----", req.body)
-    db.User.updateOne({ _id: (req.body as { id: string }).id },
+    console.log("REQ BODY INVENTORY----", req.body)
+    db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
         {$push: {
                 inventory: req.body.inventory
             }
