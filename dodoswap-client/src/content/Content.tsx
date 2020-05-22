@@ -27,7 +27,7 @@ const Content: React.FC<ContentProps> = props => {
         () => <Profile updateToken={props.updateToken} user={props.user} />
       } />
       <Route path="/catalogue" render={
-        () => <Catalogue updateToken={props.updateToken} user={props.user}/>
+        () => <Catalogue user={props.user}/>
       } />
       <Route path="/event" render={
         () => <Event updateToken={props.updateToken} user={props.user}/>

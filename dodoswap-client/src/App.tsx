@@ -32,7 +32,8 @@ export interface User {
 
 //Interface for decoded type
 export interface Decoded extends User {
-  exp: number
+  exp: number;
+  _id: string | null;
 }
 
 const App: React.FC = () => {

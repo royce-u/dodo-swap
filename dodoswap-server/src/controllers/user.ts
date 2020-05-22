@@ -71,7 +71,8 @@ router.put('/', (req: Request, res: Response) => {
 //PUT /user/wishlist (update user's wishlist)
 router.put('/wishlist', (req: Request, res: Response) => {
     console.log("REQ BODY----", req.body)
-    db.User.updateOne({ _id: (req.body as { id: string }).id },
+    console.log(req.body.id)
+    db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
         {$push: {
                 wishList: req.body.wishList
             }
