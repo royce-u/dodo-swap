@@ -37,13 +37,63 @@ router.get('/edit', (req: RequestInterface, res: Response) => {
 //PUT /user/ (update user profile)
 router.put('/', (req: Request, res: Response) => {
     console.log("REQ BODY----", req.body)
-    db.User.updateOne({ _id: (req.body as { id: string }).id }, {$set: req.body})
+    db.User.updateOne({ _id: (req.body as { id: string }).id }, { $set: req.body })
         .then((user: UserInterface) => {
             //Reissue token with updated user info
             let token: string = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
                 expiresIn: 60 * 60 * 8 //8 hours in seconds
-              })
-              res.send({token})
+            })
+            res.send({ token })
+        })
+        .catch((err: Error) => {
+            console.log(err)
+            res.send({ err })
+        })
+})
+
+//PUT /user/ (update user profile)
+router.put('/', (req: Request, res: Response) => {
+    console.log("REQ BODY----", req.body)
+    db.User.updateOne({ _id: (req.body as { id: string }).id }, { $set: req.body })
+        .then((user: UserInterface) => {
+            //Reissue token with updated user info
+            let token: string = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+                expiresIn: 60 * 60 * 8 //8 hours in seconds
+            })
+            res.send({ token })
+        })
+        .catch((err: Error) => {
+            console.log(err)
+            res.send({ err })
+        })
+})
+
+//PUT /user/wishlist (update user's wishlist)
+router.put('/wishlist', (req: Request, res: Response) => {
+    console.log("REQ BODY----", req.body)
+    db.User.updateOne({ _id: (req.body as { id: string }).id },
+        {$set: {
+                wishList: req.body.wishList
+            }
+        })
+        .then((user: UserInterface) => {
+            res.send({ user })
+        })
+        .catch((err: Error) => {
+            console.log(err)
+            res.send({ err })
+        })
+})
+//PUT /user/wishlist (update user's wishlist)
+router.put('/inventory', (req: Request, res: Response) => {
+    console.log("REQ BODY----", req.body)
+    db.User.updateOne({ _id: (req.body as { id: string }).id },
+        {$set: {
+                inventory: req.body.inventory
+            }
+        })
+        .then((user: UserInterface) => {
+            res.send({ user })
         })
         .catch((err: Error) => {
             console.log(err)

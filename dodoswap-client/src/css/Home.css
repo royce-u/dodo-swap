@@ -1,17 +1,20 @@
 
 body {
     background-color: rgb(24,167,224);
-    color: white;
+    margin: 0;
+    padding: 0;
   }
 
 
-.top-nav {
-    color: white;
-}
+
 .center-form {
     padding-top: 10%;
     height: 80vh;
 }
 .signup {
     color: white;
+}
+#event {
+    padding: 12px 16px;
+    margin: 0 0 -2px;
 }

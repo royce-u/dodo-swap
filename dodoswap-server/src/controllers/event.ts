@@ -1,14 +1,13 @@
 import { Request, Response, Router } from 'express'
 import {EventInterface} from '../models/event'
-import {UserInterface} from '../models/user'
 
 let db = require('../models')
 const router = Router()
 
 //GET / Displays index of all events
 router.get('/', (req: Request, res: Response) => {
-    console.log("DB EVENTS----", db.Event)
     db.Event.find()
+    .populate('User')
     .then((events: EventInterface[]) => {
         console.log("events HEREEEE---", events)
         res.send({events})
@@ -23,7 +22,7 @@ router.get('/', (req: Request, res: Response) => {
 router.get('/:id', (req: Request, res: Response) => {
     console.log("EVENTS ONE-", (req.params as {id: string}).id)
     db.Event.findById((req.params as {id: string}).id)
-    .then((item: EventInterface | null)=> {
+    .then((event: EventInterface | null)=> {
         console.log("event returned--", event)
         res.send({event})
     })
@@ -36,8 +35,14 @@ router.get('/:id', (req: Request, res: Response) => {
 
 // POST to /event
 router.post('/', (req: Request, res: Response) => {
-    res.send({message: "EVENT POST"})
-
+    db.Event.create(req.body) 
+    .then((newEvent: EventInterface) => {
+        res.send({ newEvent })
+    })
+    .catch((err: Error) => {
+        console.log("error in posting event", err)
+        res.send({err})
+    })
 })
 
 

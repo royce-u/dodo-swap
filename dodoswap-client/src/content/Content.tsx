@@ -3,6 +3,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 // Custom components
+import AddEvent from './pages/AddEvent'
 import Catalogue from './pages/Catalogue'
 import Event from './pages/Events'
 import Home from './pages/Home'
@@ -28,8 +29,11 @@ const Content: React.FC<ContentProps> = props => {
       <Route path="/catalogue" render={
         () => <Catalogue updateToken={props.updateToken} user={props.user}/>
       } />
-      <Route path="/events" render={
+      <Route path="/event" render={
         () => <Event updateToken={props.updateToken} user={props.user}/>
+      } />
+      <Route path="/event/new" render={
+        () => <AddEvent updateToken={props.updateToken} user={props.user}/>
       } />
 
     </div>

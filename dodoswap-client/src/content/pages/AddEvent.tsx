@@ -4,18 +4,17 @@ import React, { FormEvent, useState, useEffect } from 'react'
 //custom components
 import { Decoded } from '../../App'
 
-
-interface EventProps {
+interface NewEventProps {
     user: Decoded | null,
     updateToken: (newToken: string | null) => void
 }
 
-const Event: React.FC<EventProps> = props => {
+const AddEvent: React.FC<NewEventProps> = props => {
     return (
         <div>
-            <h1>Events Page STUB</h1>
+            <h1>Add Events FROM</h1>
         </div>
     )
 }
 
-export default Event
+export default AddEvent

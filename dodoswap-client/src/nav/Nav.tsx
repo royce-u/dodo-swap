@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { Decoded } from '../App'
-import { Menu } from 'semantic-ui-react'
+import { Dropdown, Menu } from 'semantic-ui-react'
 import Login from '../content/pages/Login'
 
 //props
@@ -16,58 +16,59 @@ const Nav: React.FC<NavProps> = props => {
     // Remove the token from local storage (or cookies)
     props.updateToken('')
     localStorage.removeItem('boilerToken')
-    
   }
 
   var links = (
     <Menu pointing secondary className="top-nav">
-        <Menu.Item 
-        name='Home' 
-        as={Link} to= "/"
-        />
-        <Login user={props.user} updateToken={props.updateToken}/>
+      <Menu.Item
+        name='Home'
+        as={Link} to="/"
+      />
+      <Login user={props.user} updateToken={props.updateToken} />
     </Menu>
-      
+
 
   )
-console.log(props.user)
+  console.log(props.user)
   // If the user is logged in, show profile page and logout links
   if (props.user) {
-    console.log("INNER PART" )
+    console.log("INNER PART")
     links = (
       <Menu pointing secondary>
-        <Menu.Item 
-        name='Home' 
-        href="/"
+        <Menu.Item
+          name='Home'
+          href="/"
         />
-      <Menu.Menu position='right'>
-      <Menu.Item 
-        name='Profile' 
-        as={Link} to= "/user"
-        />
-      <Menu.Item 
-        name='Catalogue' 
-        as={Link} to= "/catalogue"
-        />
-      <Menu.Item 
-        name='Events' 
-        as={Link} to="/events"
-        />
-      <Menu.Item 
-        name='Logout' 
-        as={Link} to= "/"
-        onClick={handleLogout}
-        />      
-      </Menu.Menu>
-    </Menu>
+        <Menu.Menu position='right'>
+          <Menu.Item
+            name='Profile'
+            as={Link} to="/user"
+          />
+          <Menu.Item
+            name='Catalogue'
+            as={Link} to="/catalogue"
+          />
+          <Dropdown pointing text="Events" id="event">
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to= "/event">Calendar</Dropdown.Item>
+              <Dropdown.Item as={Link} to= "/event/new">Add Event</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Menu.Item
+            name='Logout'
+            as={Link} to="/"
+            onClick={handleLogout}
+          />
+        </Menu.Menu>
+      </Menu>
     )
-    
+
   }
   console.log("LINKS HERE", links)
 
   return (
     <div>
-        {links}
+      {links}
     </div>
 
   )
