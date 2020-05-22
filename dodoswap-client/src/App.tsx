@@ -46,7 +46,6 @@ const App: React.FC = () => {
 
   //Function to update user token
   const updateToken = (newToken: string | null) => {
-    console.log("RANDOM UPADTE TOKEN")
     if (newToken){
       //Set the new token into localStorage
       localStorage.setItem('boilerToken' , newToken || '')

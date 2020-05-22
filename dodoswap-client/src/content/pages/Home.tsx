@@ -12,6 +12,7 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = props => {
+  
   return (
    <div> 
       <Signup user={props.user} updateToken={props.updateToken}/>    
