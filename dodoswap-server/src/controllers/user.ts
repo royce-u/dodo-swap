@@ -88,8 +88,8 @@ router.put('/wishlist', (req: Request, res: Response) => {
 //PUT /user/wishlist (update user's wishlist)
 router.put('/inventory', (req: Request, res: Response) => {
     console.log("REQ BODY----", req.body)
-    db.User.updateOne({ _id: (req.body as { id: string }).id },
-        {$set: {
+    db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
+        {$push: {
                 inventory: req.body.inventory
             }
         })
