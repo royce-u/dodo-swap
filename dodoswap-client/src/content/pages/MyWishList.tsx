@@ -1,7 +1,7 @@
 //packages
 import React, { FormEvent, useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { Button, Container, Grid, Icon } from 'semantic-ui-react'
+import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
 
@@ -11,11 +11,11 @@ interface MyWishListProps {
 
 
 const MyWishList:React.FC<MyWishListProps> = props => {
-    let [myWishList, setMyWishList] = React.useState([])
+    let [myWishList, setMyWishList] = useState([])
 
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
-        fetch(process.env.REACT_APP_SERVER_URL + 'user/inventory', {
+        fetch(process.env.REACT_APP_SERVER_URL + 'user/wishlist', {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
@@ -25,7 +25,7 @@ const MyWishList:React.FC<MyWishListProps> = props => {
         .then(response => {
             (response.json())
             .then(data => {
-                setMyWishList(data.items)
+                setMyWishList(data.user.wishList)
             })
             .catch(innErr => {
                 console.log(innErr)
@@ -35,11 +35,22 @@ const MyWishList:React.FC<MyWishListProps> = props => {
             console.log(err)
         })
     },[])
+
+    let display = myWishList.map((w:any) => {
+        return(
+            <div key={w._id}>
+                <Image className="tiny" src={w.image} alt={w.name} />
+                <p>{w.name}</p>
+            </div>
+        )
+    })
     
     return(
-        <div>
-            <h1>My Wishlist</h1>
-        </div>
+        <Container>
+            <Grid.Row>
+                <Grid.Column>{display}</Grid.Column>
+            </Grid.Row>
+        </Container>
     )
 }
 

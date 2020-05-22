@@ -1,7 +1,7 @@
 //packages
 import React, { FormEvent, useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { Button, Container, Grid, Icon } from 'semantic-ui-react'
+import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 
 //custom components
@@ -90,10 +90,10 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     },[])
 
     if (props.user) {            
-        let displayyy = catItems.slice(0,10).map((c: any) => {
+        let display = catItems.slice(0,10).map((c: any) => {
             return (
                     <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
-                    <img src={`${c.image}`} alt={`{${c.name}}`}/>
+                    <Image src={c.image} alt={c.name}/>
                     <Link to={`/catalogue/${c._id}`}>{c.name}</Link>
                     <Button.Group> 
                     <Button icon onClick={(e:React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}> 
@@ -111,7 +111,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             <Container>
             <h1>Catalogue Page</h1>
             <Grid>
-                {displayyy}
+                {display}
             </Grid>
             </Container>
         )   

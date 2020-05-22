@@ -1,12 +1,13 @@
 //packages
 import React, { FormEvent, useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { Button, Container, Grid, Icon } from 'semantic-ui-react'
+import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
 
 interface MyInventoryProps {
     user?: Decoded | null
+    
 }
 
 const MyInventory: React.FC<MyInventoryProps> = props => {
@@ -14,7 +15,6 @@ const MyInventory: React.FC<MyInventoryProps> = props => {
 
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
-        console.log('token--------->',token)
         fetch(process.env.REACT_APP_SERVER_URL + 'user/inventory', {
             method: 'GET',
             headers: {
@@ -25,8 +25,7 @@ const MyInventory: React.FC<MyInventoryProps> = props => {
             .then(response => {
                 (response.json())
                     .then(data => {
-                        setMyInv(data.items)
-                        console.log('puhrawps------>', props.user)
+                        setMyInv(data.user.inventory)
                     })
                     .catch(innErr => {
                         console.log(innErr)
@@ -35,29 +34,29 @@ const MyInventory: React.FC<MyInventoryProps> = props => {
             .catch(err => {
                 console.log(err)
             })
-
     }, [])
 
-    if (props.user) {
-        let displayyy = myInv.map((m: any) => {
+    
+        let display = myInv.map((m: any) => {
             return (
                 <div key={m._id}>
+                    <Image className="tiny" src={m.image} alt={m.name} />
                     <p>{m.name}</p>
                 </div>
             )
         })
         return (
-            <div>
-                <h2>inventory stub</h2>
-                <Grid>{displayyy}</Grid>
-            </div>
+            <Container>
+               <Grid colums={3} divided>
+                   <Grid.Row>
+                        <Grid.Column>{display}</Grid.Column>
+                   </Grid.Row>
+                
+               </Grid>
+            </Container>
+           
         )
-    }
-    return (
-        <div>
-            <h1>No Token</h1>
-        </div>
-    )
+
 }
 
 export default MyInventory 
