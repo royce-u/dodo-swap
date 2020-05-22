@@ -43,9 +43,13 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    attendees: [{attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
-    top5: {type: mongoose.Schema.Types.ObjectId, ref: 'Item'}, 
-    toBring: {type: mongoose.Schema.Types.ObjectId, ref: 'Item'}}], 
+    attendees: [
+        {
+        attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+        top5: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}], 
+        toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
+        }
+    ], 
     date: Date,
     time: String,
     maxVisitor: {

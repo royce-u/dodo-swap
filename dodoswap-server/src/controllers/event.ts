@@ -1,9 +1,13 @@
 import { Request, Response, Router } from 'express'
 import { EventInterface } from '../models/event'
+import { UserInterface } from '../models/user'
+import mongoose from 'mongoose'
 
 let db = require('../models')
 const router = Router()
-
+interface RequestInterface extends Request {
+    user?: UserInterface
+}
 //GET / Displays index of all events
 router.get('/', (req: Request, res: Response) => {
     db.Event.find()
@@ -46,15 +50,20 @@ router.post('/', (req: Request, res: Response) => {
 })
 
 //PUT /event (update event when other users joint)
-router.put('/', (req: Request, res: Response) => {
+router.put('/', (req: RequestInterface, res: Response) => {
     console.log("REQ BODY----", req.body)
+    req.body.top5 = req.body.top5 ? (Array.isArray(req.body.top5) ? req.body.top5 : [req.body.top5]) : []
+    let top5 = req.body.top5.map((t: string) => mongoose.Types.ObjectId(t))
+    req.body.toBring = req.body.toBring ? (Array.isArray(req.body.toBring) ? req.body.toBring : [req.body.toBring]) : []
+    let toBring = req.body.toBring.map((t: string) => mongoose.Types.ObjectId(t))
+
     req.body.attendee = {
-        attendeeId: req.body.attendeeId,
-        top5: req.body.top5,
-        toBring: req.body.toBring
+        attendeeId: mongoose.Types.ObjectId(req.user ? req.user._id : ""),
+        top5: top5,
+        toBring: toBring
     }
     db.Event.updateOne({ _id: (req.body as { id: string }).id },
-        { $push: {attendee: req.body.attendee} })
+        { $push: {attendees: req.body.attendee} })
         .then((updatedEvent: EventInterface) => {
             res.send({ updatedEvent })
         })
