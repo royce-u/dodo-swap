@@ -67,14 +67,11 @@ userSchema.pre('save', function(this: UserInterface, done) {
 
 //Make a JSON representation of the user (for sending on the JWT payload)
 userSchema.set('toJSON', {
+
     transform: (doc, user: UserInterface) => {
+        console.log('TRANSFORM!')
         delete user.password
         delete user.__v 
-        delete user.wishList
-        delete user.friends
-        delete user.inventory
-        delete user.events
-        delete user.ratings
         return user
     }
 })

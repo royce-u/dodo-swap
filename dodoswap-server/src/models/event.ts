@@ -10,7 +10,7 @@ export interface EventInterface extends mongoose.Document {
         attendeeId: string,
         top5: ItemInterface[],
         toBring: ItemInterface[]
-    };
+    }[];
     date: Date;
     time: string; 
     maxVisitor: number;
@@ -22,11 +22,11 @@ export interface EventInterface extends mongoose.Document {
     };
 }
 //Create Embedded Attendee Schema
-let attendeeSchema: mongoose.Schema = new mongoose.Schema({
-    attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    top5: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
-    toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
-})
+// let attendeeSchema: mongoose.Schema = new mongoose.Schema({
+//     attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+//     top5: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
+//     toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
+// })
 //Create Embedded Comment Schema
 let commentSchema: mongoose.Schema = new mongoose.Schema({
     author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -43,7 +43,13 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    attendees: attendeeSchema, 
+    attendees: [
+        {
+        attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+        top5: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}], 
+        toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
+        }
+    ], 
     date: Date,
     time: String,
     maxVisitor: {
