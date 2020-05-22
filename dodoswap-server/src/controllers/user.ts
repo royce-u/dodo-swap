@@ -72,7 +72,7 @@ router.put('/', (req: Request, res: Response) => {
 router.put('/wishlist', (req: Request, res: Response) => {
     console.log("REQ BODY----", req.body)
     db.User.updateOne({ _id: (req.body as { id: string }).id },
-        {$set: {
+        {$push: {
                 wishList: req.body.wishList
             }
         })
@@ -88,7 +88,7 @@ router.put('/wishlist', (req: Request, res: Response) => {
 router.put('/inventory', (req: Request, res: Response) => {
     console.log("REQ BODY----", req.body)
     db.User.updateOne({ _id: (req.body as { id: string }).id },
-        {$set: {
+        {$push: {
                 inventory: req.body.inventory
             }
         })
