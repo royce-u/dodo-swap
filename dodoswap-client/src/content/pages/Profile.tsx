@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
+import { Decoded } from '../../App'
 
-const Profile = props => {
+//props
+interface ProfileProps {
+  user: Decoded | null,
+  updateToken: (newToken: string | null) => void
+}
+
+const Profile: React.FC<ProfileProps> = props => {
   let [secretMessage, setSecretMessage] = useState('') 
 
   useEffect(()=> {
@@ -25,7 +32,7 @@ const Profile = props => {
       response.json()
       .then(result => {
         console.log(result)
-        setSecretMessage('YELLLO! WECOME')
+        setSecretMessage('HELLLO! WELCOME')
       })
     })
     .catch(err => {
@@ -35,11 +42,12 @@ const Profile = props => {
   })
   //Make sure there is a user before trying to show their info
   if (!props.user) {
-    return <Redirect to="/login" />
+    return <Redirect to="/" />
   }
 
   return (
     <div>
+      <h1>PROFILE PAGE</h1>
       <h2>{props.user.firstname}</h2>
       <img src={props.user.pic} alt={props.user.firstname}/>
       <p>{secretMessage}</p>

@@ -5,16 +5,16 @@ import { Button, Container, Grid, Icon } from 'semantic-ui-react'
 
 
 //custom components
-import Content from '../Content'
 import { Decoded } from '../../App'
 
 interface CatalogueProps {
     user: Decoded | null
+    
 }
 
 const Catalogue: React.FC<CatalogueProps> = props => {
     let [catItems, setCatItems] = useState([])
-    let [fetchUser, setFetchUser] = React.useState<String>('')
+    let [fetchUser, setFetchUser] = React.useState<String | null>('')
     let [fetchWish, setFetchWish] = React.useState<String>('')
     let [inventory, setInventory] = React.useState<String>('')
 
@@ -22,16 +22,15 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     const handleWishList = ((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let token = localStorage.getItem('boilerToken')
-        
         console.log('added to faves') 
         if (props.user) {
-            console.log('props.user: ', props.user._id)
             setFetchUser(props.user._id)
             fetchUser = props.user._id
         }
-        console.log('---------',e.currentTarget.value)
-        let data = {wishList: e.currentTarget.value,
-            _id: fetchUser}
+        let data = {
+            wishList: e.currentTarget.value,
+            chicken: fetchUser
+        }
         fetch(process.env.REACT_APP_SERVER_URL + 'user/wishlist', {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -40,60 +39,37 @@ const Catalogue: React.FC<CatalogueProps> = props => {
                 'Authorization':  `Bearer ${token}`
             }
         })
-        // console.log('props.user: ', props.user)
         console.log('item# from button after fetchcall:', e.currentTarget.value)
-        // setFetchWish(e.currentTarget.value)
-        // console.log('wish after fetchcall: ',fuckYou)
-        
-        // const sendIt = async () => {
-        //     e.preventDefault()
-        //     let token = localStorage.getItem('boilerToken')
-        //     if (props.user) {
-        //         console.log(' inside sendIt ------props.user: ', props.user._id)
-        //         setFetchUser(props.user._id)
-        //         // fetchUser = props.user._id
-        //     }
-            
-        //     await sendIt()
-        //     fetch(process.env.REACT_APP_SERVER_URL + 'user', {
-        //         method: 'PUT',
-        //         body: JSON.stringify({
-        //             wishList: e.currentTarget.value,
-        //             _id: fetchUser
-        //         }),
-        //         headers: {
-        //             'Authorization':  `Bearer ${token}`
-        //         }
-        //       })
-        // }
-        
-        // fetch(process.env.REACT_APP_SERVER_URL + 'user', {
-        //     method: 'PUT',
-        //     body: JSON.stringify({
-        //         wishList: e.currentTarget.value,
-        //         _id: fetchUser
-        //     }),
-        //     headers: {
-        //         'Authorization':  `Bearer ${token}`
-        //     }
-        //   })
     })
     
-    const handleInventory = ((e: FormEvent) => {
+    const handleInventory = ((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        // setInventory(e.target.value)
-        console.log('added to inventory')  
-        console.log(inventory)      
+        let token = localStorage.getItem('boilerToken')
+        console.log('added to inventory') 
+        if (props.user) {
+            setFetchUser(props.user._id)
+            fetchUser = props.user._id
+        }
+        let data = {
+            inventory: e.currentTarget.value,
+            chicken: fetchUser
+        }
+        fetch(process.env.REACT_APP_SERVER_URL + 'user/inventory', {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': "application/json",
+                'Authorization':  `Bearer ${token}`
+            }
+        })      
     })
-    const handleClick = () => {
-        console.log('i clicked')
-    }
+  
 
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
         fetch(process.env.REACT_APP_SERVER_URL + 'catalogue/', {
             headers: {
-                'Authorization':  `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             }
           })
           .then(response => {
@@ -112,11 +88,6 @@ const Catalogue: React.FC<CatalogueProps> = props => {
               console.log('error with fetch call: ', err)
           })
     },[])
-    // console.log('outside useEffect', catItems)
-    //Make sure there is a user before trying to show their info
-    // if (!props.user) {
-    //     return <Redirect to="/auth/login" />
-    //   }
 
     if (props.user) {            
         let displayyy = catItems.slice(0,10).map((c: any) => {
@@ -129,12 +100,9 @@ const Catalogue: React.FC<CatalogueProps> = props => {
                         <Icon name='heart' />
                     </Button>
                  
-                    <form onSubmit={handleInventory}>
-                        <input type="hidden" name="inventory" value={c._id}/>
-                    <Button icon type="submit">
+                    <Button icon onClick={(e:React.MouseEvent<HTMLButtonElement>) => handleInventory(e)} value={c._id}>
                         <Icon name='plus square outline' />
                     </Button>
-                    </form>
                     </Button.Group>
                 </Grid.Column>              
             )

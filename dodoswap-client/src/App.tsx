@@ -8,8 +8,8 @@ import jwtDecode from 'jwt-decode'
 import './App.css';
 import Content from './content/Content'
 import Footer from './nav/Footer'
-
 import Nav from './nav/Nav'
+
 
 
 export interface User {
@@ -32,7 +32,8 @@ export interface User {
 
 //Interface for decoded type
 export interface Decoded extends User {
-  exp: number
+  exp: number;
+  _id: string | null;
 }
 
 const App: React.FC = () => {
@@ -46,6 +47,7 @@ const App: React.FC = () => {
 
   //Function to update user token
   const updateToken = (newToken: string | null) => {
+    console.log("RANDOM UPADTE TOKEN")
     if (newToken){
       //Set the new token into localStorage
       localStorage.setItem('boilerToken' , newToken || '')
@@ -86,13 +88,9 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="App">
-        <Nav user={user} updateToken={updateToken}/>
-        
-        <main>
-          <Content user={user} updateToken={updateToken} />
-          
-        </main>
+      <div className="App"> 
+        <Nav user={user} updateToken={updateToken}/>  
+        <Content user={user} updateToken={updateToken} />         
         <Footer />
       </div>
 

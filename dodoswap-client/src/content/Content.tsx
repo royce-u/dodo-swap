@@ -3,12 +3,12 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 // Custom components
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Profile from './pages/Profile'
-import Signup from './pages/Signup'
+import AddEvent from './pages/AddEvent'
 import Catalogue from './pages/Catalogue'
-import { Decoded, User } from '../App'
+import Event from './pages/Events'
+import Home from './pages/Home'
+import Profile from './pages/Profile'
+import { Decoded } from '../App'
 
 //props
 interface ContentProps {
@@ -20,18 +20,20 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = props => {
   return (
     <div className="container">
-      <Route exact path="/" component={Home} />
-      <Route path="/auth/login" render={
-        () => <Login user={props.user} updateToken={props.updateToken} />
+      <Route exact path="/" render={
+        () => <Home updateToken={props.updateToken} user={props.user} />
       } />
       <Route path="/user" render={
-        () => <Profile user={props.user} />
-      } />
-      <Route path="/auth/signup" render={
-        () => <Signup user={props.user} updateToken={props.updateToken} />
+        () => <Profile updateToken={props.updateToken} user={props.user} />
       } />
       <Route path="/catalogue" render={
         () => <Catalogue user={props.user}/>
+      } />
+      <Route path="/event" render={
+        () => <Event updateToken={props.updateToken} user={props.user}/>
+      } />
+      <Route path="/event/new" render={
+        () => <AddEvent updateToken={props.updateToken} user={props.user}/>
       } />
 
     </div>
