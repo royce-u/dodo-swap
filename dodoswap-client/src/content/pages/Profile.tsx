@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Decoded } from '../../App'
 import { Container, Grid, Header, Image, Tab, Table } from 'semantic-ui-react'
+import MyEvents from './MyEvents'
+import MyInventory from './MyInventory'
+import MyWishList from './MyWishList'
 
 //props
 interface ProfileProps {
@@ -47,9 +50,9 @@ const Profile: React.FC<ProfileProps> = props => {
     return <Redirect to="/" />
   }
   const panes = [
-    { menuItem: 'My Events', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-    { menuItem: 'My Wishlist', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-    { menuItem: 'My Inventory', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+    { menuItem: 'My Events', render: () => <Tab.Pane><MyEvents /></Tab.Pane> },
+    { menuItem: 'My Wishlist', render: () => <Tab.Pane><MyWishList /></Tab.Pane> },
+    { menuItem: 'My Inventory', render: () => <Tab.Pane><MyInventory /></Tab.Pane> }
   ]
   return (
     <Container>
