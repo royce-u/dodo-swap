@@ -106,7 +106,7 @@ router.put('/wishlist', (req: Request, res: Response) => {
 router.put('/inventory', (req: Request, res: Response) => {
     console.log("REQ BODY INVENTORY----", req.body)
     db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
-        {$push: {
+        {$addToSet: {
                 inventory: req.body.inventory
             }
         })
