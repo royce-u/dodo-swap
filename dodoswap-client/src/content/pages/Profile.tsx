@@ -2,6 +2,7 @@ import React, { FormEvent, useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Decoded } from '../../App'
 import { Button, Container, Form, Grid, Header, Icon, Image, Input, Modal, Tab, Table } from 'semantic-ui-react'
+import ProfileModal from './ProfileModal'
 
 //props
 interface ProfileProps {
@@ -14,6 +15,12 @@ const Profile: React.FC<ProfileProps> = props => {
   let [email, setEmail] = React.useState<String>('')
   let [firstname, setFirstname] = React.useState<String>('')
   let [lastname, setLastname] = React.useState<String>('')
+  let [acName, setAcname] = React.useState<String>('')
+  let [islandName, setIslandName] = React.useState<String>('')
+  let [nativeFruit, setNativeFruit] = React.useState<String>('')
+  let [pic, setPic] = React.useState<String>('')
+
+  
 
   useEffect(() => {
     //Grab token from local storage
@@ -46,57 +53,9 @@ const Profile: React.FC<ProfileProps> = props => {
   }, [])
   console.log("PROPS USER", props.user)
 
-  //fetch call to submit user profile edits
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    //Send the user sign up data to the server
-    console.log('submit', email)
+  
 
-    // // Fetch call to POST data
-    // fetch(process.env.REACT_APP_SERVER_URL + 'auth/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     email
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-  }
-
-
-  //edit user profile modal
-  const TriggerModal = () => (
-    <Modal trigger={<Icon name='edit' size='large'></Icon>} closeIcon>
-      <Header icon='user circle' content='Edit your profile' />
-      <Grid columns={2} verticalAlign="middle">
-        <Grid.Row>
-          <Grid.Column width={6}>
-            <Form onSubmit={handleSubmit} className="updateProfile">
-              <Form.Group>
-                <Form.Field>
-                  <label>First Name</label>
-                  <Input name="firstname" placeholder="Your first name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
-                  <label>Last Name</label>
-                  <Input name="lastname" placeholder="Your last name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} />
-                </Form.Field>
-              </Form.Group>
-              <Form.Group>
-                <Form.Field>
-                  <label>Email</label>
-                  <Input type="email" placeholder="Your email" name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
-                </Form.Field>
-              </Form.Group>
-              <Button type="submit">Update</Button>
-            </Form>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Modal>
-  )
-
-  //User profile panes   
+  //User profile panes
   const panes = [
     { menuItem: 'My Events', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
     { menuItem: 'My Wishlist', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
@@ -133,7 +92,7 @@ const Profile: React.FC<ProfileProps> = props => {
                 <Header as='h4' image>
                   <Image src='https://www.pngitem.com/pimgs/m/148-1484120_animal-crossing-new-leaf-icon-hd-png-download.png' rounded size='mini' />
                   <Header.Content>
-                    AC Name
+                    AC User Name
                 <Header.Subheader>{props.user.userName}</Header.Subheader>
                   </Header.Content>
                 </Header>
@@ -173,7 +132,7 @@ const Profile: React.FC<ProfileProps> = props => {
                 <Header>
                   <Header.Content>
                     <Header.Subheader >
-                      <TriggerModal />
+                      <ProfileModal />
                     </Header.Subheader>
                   </Header.Content>
                 </Header>
