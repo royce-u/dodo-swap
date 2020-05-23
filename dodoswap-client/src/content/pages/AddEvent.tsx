@@ -38,7 +38,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
                     </Form.Field>
                 </Form.Group>
                 <Form.Field label='Description' control='textarea' rows='3' name="description" />
-                <input type="hidden" value={} name="hostId" />
+                <input type="hidden" value={''} name="hostId" />
                 <Button type="submit">Create Event</Button>
             </Form>
         </Container>

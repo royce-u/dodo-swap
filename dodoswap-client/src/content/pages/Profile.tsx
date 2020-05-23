@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { FormEvent, useState, useEffect } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import { Decoded } from '../../App'
-import { Container, Grid, Header, Image, Tab, Table } from 'semantic-ui-react'
+import { Button, Container, Form, Grid, Header, Icon, Image, Input, Modal, Tab, Table } from 'semantic-ui-react'
 
 //props
 interface ProfileProps {
@@ -11,6 +11,9 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = props => {
   let [secretMessage, setSecretMessage] = useState('')
+  let [email, setEmail] = React.useState<String>('')
+  let [firstname, setFirstname] = React.useState<String>('')
+  let [lastname, setLastname] = React.useState<String>('')
 
   useEffect(() => {
     //Grab token from local storage
@@ -40,17 +43,72 @@ const Profile: React.FC<ProfileProps> = props => {
         console.log(err)
         setSecretMessage('No message for you')
       })
-  })
+  }, [])
   console.log("PROPS USER", props.user)
-  //Make sure there is a user before trying to show their info
-  if (!props.user) {
-    return <Redirect to="/" />
+
+  //fetch call to submit user profile edits
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    //Send the user sign up data to the server
+    console.log('submit', email)
+
+    // // Fetch call to POST data
+    // fetch(process.env.REACT_APP_SERVER_URL + 'auth/login', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     email
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
   }
+
+
+  //edit user profile modal
+  const TriggerModal = () => (
+    <Modal trigger={<Icon name='edit' size='large'></Icon>} closeIcon>
+      <Header icon='user circle' content='Edit your profile' />
+      <Grid columns={2} verticalAlign="middle">
+        <Grid.Row>
+          <Grid.Column width={6}>
+            <Form onSubmit={handleSubmit} className="updateProfile">
+              <Form.Group>
+                <Form.Field>
+                  <label>First Name</label>
+                  <Input name="firstname" placeholder="Your first name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Last Name</label>
+                  <Input name="lastname" placeholder="Your last name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group>
+                <Form.Field>
+                  <label>Email</label>
+                  <Input type="email" placeholder="Your email" name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                </Form.Field>
+              </Form.Group>
+              <Button type="submit">Update</Button>
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Modal>
+  )
+
+  //User profile panes   
   const panes = [
     { menuItem: 'My Events', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
     { menuItem: 'My Wishlist', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
     { menuItem: 'My Inventory', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
   ]
+
+
+  //Make sure there is a user before trying to show their info
+  if (!props.user) {
+    return <Redirect to="/" />
+  }
+
   return (
     <Container>
       <h1>PASSPORT</h1>
@@ -102,7 +160,7 @@ const Profile: React.FC<ProfileProps> = props => {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-            <Table.Cell>
+              <Table.Cell>
                 <Header as='h4' image>
                   <Image src='https://cdn0.iconfinder.com/data/icons/super-mono-reflection/blue/mail_blue.png' rounded size='mini' />
                   <Header.Content>
@@ -111,10 +169,17 @@ const Profile: React.FC<ProfileProps> = props => {
                   </Header.Content>
                 </Header>
               </Table.Cell>
-              <Table.Cell/>
+              <Table.Cell textAlign='right'>
+                <Header>
+                  <Header.Content>
+                    <Header.Subheader >
+                      <TriggerModal />
+                    </Header.Subheader>
+                  </Header.Content>
+                </Header>
+              </Table.Cell>
             </Table.Row>
           </Table>
-
         </Grid.Column>
       </Grid>
       <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} />

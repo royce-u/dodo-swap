@@ -9,7 +9,7 @@ import { Decoded } from '../../App'
 
 interface CatalogueProps {
     user: Decoded | null
-    
+
 }
 
 const Catalogue: React.FC<CatalogueProps> = props => {
@@ -18,11 +18,11 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     let [fetchWish, setFetchWish] = React.useState<String>('')
     let [inventory, setInventory] = React.useState<String>('')
 
-    
+
     const handleWishList = ((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let token = localStorage.getItem('boilerToken')
-        console.log('added to faves') 
+        console.log('added to faves')
         if (props.user) {
             setFetchUser(props.user._id)
             fetchUser = props.user._id
@@ -36,16 +36,16 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': "application/json",
-                'Authorization':  `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             }
         })
         console.log('item# from button after fetchcall:', e.currentTarget.value)
     })
-    
+
     const handleInventory = ((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let token = localStorage.getItem('boilerToken')
-        console.log('added to inventory') 
+        console.log('added to inventory')
         if (props.user) {
             setFetchUser(props.user._id)
             fetchUser = props.user._id
@@ -59,11 +59,11 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': "application/json",
-                'Authorization':  `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             }
-        })      
+        })
     })
-  
+
 
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
@@ -71,55 +71,55 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-          })
-          .then(response => {
-              response.json()
-              .then(data => {
-                  console.log('data: ',data)
-                  if (data){
-                      setCatItems(data.items)
-                  }
-              })
-              .catch(innErr => {
-                  console.log('inner catch: ',innErr)
-              })
-          })
-          .catch(err => {
-              console.log('error with fetch call: ', err)
-          })
-    },[])
+        })
+            .then(response => {
+                response.json()
+                    .then(data => {
+                        console.log('data: ', data)
+                        if (data) {
+                            setCatItems(data.items)
+                        }
+                    })
+                    .catch(innErr => {
+                        console.log('inner catch: ', innErr)
+                    })
+            })
+            .catch(err => {
+                console.log('error with fetch call: ', err)
+            })
+    }, [])
 
-    if (props.user) {            
-        let displayyy = catItems.slice(0,10).map((c: any) => {
+    if (props.user) {
+        let display = catItems.slice(0, 10).map((c: any) => {
             return (
-                    <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
-                    <img src={`${c.image}`} alt={`{${c.name}}`}/>
+                <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
+                    <img src={`${c.image}`} alt={`{${c.name}}`} />
                     <Link to={`/catalogue/${c._id}`}>{c.name}</Link>
-                    <Button.Group> 
-                    <Button icon onClick={(e:React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}> 
-                        <Icon name='heart' />
-                    </Button>
-                 
-                    <Button icon onClick={(e:React.MouseEvent<HTMLButtonElement>) => handleInventory(e)} value={c._id}>
-                        <Icon name='plus square outline' />
-                    </Button>
+                    <Button.Group>
+                        <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}>
+                            <Icon name='heart' />
+                        </Button>
+
+                        <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleInventory(e)} value={c._id}>
+                            <Icon name='plus square outline' />
+                        </Button>
                     </Button.Group>
-                </Grid.Column>              
+                </Grid.Column>
             )
         })
         return (
             <Container>
-            <h1>Catalogue Page</h1>
-            <Grid>
-                {displayyy}
-            </Grid>
+                <h1>Catalogue Page</h1>
+                <Grid>
+                    {display}
+                </Grid>
             </Container>
-        )   
-    }       
+        )
+    }
     return (
         <div>
             <h1>No Token - GO HOME!</h1>
-            
+
         </div>
     )
 }
