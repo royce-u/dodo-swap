@@ -56,6 +56,7 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
     ], 
     date: Date,
     time: String,
+    description: String,
     maxVisitor: {
         type: Number,
         default: 3,

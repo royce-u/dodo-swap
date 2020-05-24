@@ -90,7 +90,7 @@ router.put('/', (req: Request, res: Response) => {
 router.put('/wishlist', (req: Request, res: Response) => {
     console.log("REQ BODY WISHLIST----", req.body)
     db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
-        {$push: {
+        {$addToSet: {
                 wishList: req.body.wishList
             }
         })
@@ -102,7 +102,7 @@ router.put('/wishlist', (req: Request, res: Response) => {
             res.send({ err })
         })
 })
-//PUT /user/wishlist (update user's wishlist)
+//PUT /user/wishlist (update user's wishlist) $addToSet only adds items not in list
 router.put('/inventory', (req: Request, res: Response) => {
     console.log("REQ BODY INVENTORY----", req.body)
     db.User.updateOne({ _id: (req.body as { chicken: string }).chicken },
