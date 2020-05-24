@@ -1,9 +1,16 @@
 //packages
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+
+
 
 //custom components
 import { Decoded } from '../../App'
+import '@fullcalendar/core/main.css';
+import '@fullcalendar/daygrid/main.css';
+import interactionPlugin from '@fullcalendar/interaction';
 
 
 interface EventProps {
@@ -12,51 +19,20 @@ interface EventProps {
 
 const Event:React.FC<EventProps> = props => {
     let [events, setEvents] = useState([])
-    //on load - fetch all events
-    useEffect(() => {
-        let token = localStorage.getItem('boilerToken')
-        fetch(process.env.REACT_APP_SERVER_URL + 'event', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            response.json()
-            .then(data => {
-                setEvents(data.events)
-            })
-            .catch(innErr => {
-                console.log(innErr)
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    },[])
+    
 
-    if (!props.user){
-        return null
-    }
-
-    let display = events.map((e:any) => {
-        return (
-            <div key={e._id}>
-                <p>{e.date}</p>
-                <p>{e.time}</p>
-                <p>{e.maxVisitor}</p>
-            </div>
-        )
-    })
-
+    
     return (
-        <div>
-            <Container>
-            <h1>Events Page STUB</h1>
-                <Grid.Column>{display}</Grid.Column>
-            </Container>
-        </div>
+        <FullCalendar 
+        defaultView="dayGridMonth" 
+        plugins={[ dayGridPlugin, interactionPlugin ]}
+        selectable={true}
+        editable={false} 
+        events={[
+            {title: 'events 1', date: '2020-04-01', description: 'fuck you'}
+        ]}
+        />
+        
     )
 }
     export default Event
