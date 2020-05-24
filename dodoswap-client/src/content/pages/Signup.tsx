@@ -80,21 +80,21 @@ const Signup: React.FC<SignupProps> = props => {
               <Form.Group>
                 <Form.Field>
                   <label>First Name</label>
-                <Input name="firstname" placeholder="Your first name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} />
+                <Input name="firstname" placeholder="Your first name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} required/>
                 </Form.Field>
                 <Form.Field>
                 <label>Last Name</label>
-                <Input name="lastname" placeholder="Your last name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} />
+                <Input name="lastname" placeholder="Your last name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} required/>
                 </Form.Field>
               </Form.Group>
               <Form.Group>
                 <Form.Field>
                   <label>Email</label>
-                <Input type="email" placeholder="Your email"name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                <Input type="email" placeholder="Your email"name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} required/>
                 </Form.Field>
                 <Form.Field>
                   <label>Password</label>
-                <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+                <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} required/>
                 </Form.Field>
               </Form.Group>
               <Button type="submit">Sign Me Up!</Button>

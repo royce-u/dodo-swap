@@ -42,6 +42,8 @@ const ProfileModal: React.FC<ModalProps> = props => {
     if (!props.user) {
         return null
     }
+
+
     let idee = props.user._id ? props.user._id : undefined
     return (
 
@@ -50,37 +52,40 @@ const ProfileModal: React.FC<ModalProps> = props => {
             <Modal.Content>
                 <Form.Group widths='equal'>
                     <Form.Field>
-                        <Form.Input label="First Name" name="firstname" placeholder={props.user.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} />
+                        <Form.Input label="First Name" name="firstname" value={props.user.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} />
                     </Form.Field>
                     <Form.Field>
-                        <Form.Input label="Last Name" name="lastname" placeholder={props.user.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} />
+                        <Form.Input label="Last Name" name="lastname" value={props.user.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} />
                     </Form.Field>
                     <Form.Field>
-                        <Form.Input label="AC User Name" name="acName" placeholder={props.user.userName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAcname(e.target.value)} />
+                        <Form.Input label="AC User Name" name="acName" value={props.user.userName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAcname(e.target.value)} required />
                     </Form.Field>
                 </Form.Group>
                 <Form.Group widths='equal'>
-                    <Form.Field>
-                        <Form.Input label="Island Name" name="islandName" placeholder={props.user.islandName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIslandName(e.target.value)} />
+                    <Form.Field >
+                        <Form.Input label="Island Name" name="islandName" value={props.user.islandName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIslandName(e.target.value)} required />
                     </Form.Field>
-                    <Form.Field label='Native Fruit' control='select' name="nativeFruit" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNativeFruit(e.target.value)}>
-                        <option value='apple'>Apples</option>
-                        <option value='cherry'>Cherries</option>
-                        <option value='orange'>Oranges</option>
-                        <option value='peach'>Peaches</option>
-                        <option value='pear'>Pears</option>
+                    <Form.Field>
+                        <Form.Input required label='Native Fruit' control='select' name="nativeFruit" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNativeFruit(e.target.value)}>
+                            <option value='apple'>Apples</option>
+                            <option value='cherry'>Cherries</option>
+                            <option value='orange'>Oranges</option>
+                            <option value='peach'>Peaches</option>
+                            <option value='pear'>Pears</option>
+                        </Form.Input>
                     </Form.Field>
                     <Form.Field>
                         <input type="hidden" value={idee} name="id" />
                     </Form.Field>
                 </Form.Group>
-
                 <Form.Field>
                     <label>Profile Pic</label>
-                    <Input name="pic" placeholder={props.user.pic} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPic(e.target.value)} />
+                    <Input name="pic" value={props.user.pic} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPic(e.target.value)} />
                 </Form.Field>
-                <Button type="submit">Update</Button>
             </Modal.Content>
+            <Modal.Actions>
+                <Button color='green' type="submit" positive>Update</Button>
+            </Modal.Actions>
         </Modal>
     )
 
