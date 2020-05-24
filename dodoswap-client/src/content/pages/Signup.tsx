@@ -12,11 +12,11 @@ interface SignupProps {
 
 const Signup: React.FC<SignupProps> = props => {
   // Declare and initialize state variables
-  let [email, setEmail] = React.useState<String>('')
-  let [firstname, setFirstname] = React.useState<String>('')
-  let [lastname, setLastname] = React.useState<String>('')
-  let [message, setMessage] = React.useState<String>('')
-  let [password, setPassword] = React.useState<String>('')
+  let [email, setEmail] = useState<String>('')
+  let [firstname, setFirstname] = useState<String>('')
+  let [lastname, setLastname] = useState<String>('')
+  let [message, setMessage] = useState<String>('')
+  let [password, setPassword] = useState<String>('')
 
   
   const handleSubmit = (e: FormEvent) => {
@@ -66,8 +66,7 @@ const Signup: React.FC<SignupProps> = props => {
 
   return (
 
-    <Container className="center-form">
-      
+    <Container className="center-form">   
       <Grid columns={2} verticalAlign="middle">
         <Grid.Row>
           <Grid.Column >
