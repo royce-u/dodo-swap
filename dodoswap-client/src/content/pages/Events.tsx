@@ -12,7 +12,7 @@ interface EventProps {
 
 const Event:React.FC<EventProps> = props => {
     let [events, setEvents] = useState([])
-
+    //on load - fetch all events
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
         fetch(process.env.REACT_APP_SERVER_URL + 'event', {
@@ -26,10 +26,6 @@ const Event:React.FC<EventProps> = props => {
             response.json()
             .then(data => {
                 setEvents(data.events)
-                
-                console.log(typeof(data.events))
-                // console.log('events---->',events)
-                console.log('data---->', data)
             })
             .catch(innErr => {
                 console.log(innErr)
@@ -38,9 +34,7 @@ const Event:React.FC<EventProps> = props => {
         .catch(err => {
             console.log(err)
         })
-
     },[])
-    console.log('events---->',events)
 
     if (!props.user){
         return null

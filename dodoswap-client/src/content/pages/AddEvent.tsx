@@ -1,11 +1,10 @@
 //packages
-import React, { FormEvent, useState, useEffect } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { Button, Container, Form } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 //custom components
 import { Decoded } from '../../App'
 import { Redirect } from 'react-router-dom';
-// import EventInterface from '../../../dodoswap-server/src/models/event.ts'
 
 interface NewEventProps {
     user: Decoded | null,
@@ -17,12 +16,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
     const [maxVisitor, setMaxVisitor] = useState(1)
-    const [dodoCode, setDodoCode] = useState('')
     const [hostDescription, sethostDescription] = useState('')
-    const [userId, setUserId]=useState<string | null>('')
-    const [hostId, setHostId] = useState('')
-    // const [attendees, setAttendees] = useState('')
-    const [privater, setPrivater] = useState(false)
     const [redirect, setRedirect] = useState(false)
 
 
@@ -49,7 +43,6 @@ const AddEvent: React.FC<NewEventProps> = props => {
 
     const handleSubmit = ((e:FormEvent) => {
         e.preventDefault()
-        console.log('idee----->',idee)
         let token = localStorage.getItem('boilerToken')
         fetch(process.env.REACT_APP_SERVER_URL + 'event', {
             method: 'POST',
@@ -70,7 +63,6 @@ const AddEvent: React.FC<NewEventProps> = props => {
         setRedirect(true)
         
     })
-    //add value in input hidden host id
 
     if (!props.user){
         //return loading spinner
@@ -99,18 +91,14 @@ const AddEvent: React.FC<NewEventProps> = props => {
                         <option value='6'>6</option>
                         <option value='7'>7</option>
                     </Form.Field>
-                
                 </Form.Group>
                 <Form.Field onChange={(e:any) => sethostDescription(e.target.value)}value={hostDescription} label='Description' control='textarea' rows='3' name="comments" />
-                
-                <input onChange={(e:any) => setHostId(e.target.value)}type="hidden" value={idee} name="hostId" />
+                <input type="hidden" value={idee} name="hostId" />
                 <Button type="submit" >Create Event</Button>
             </Form>
             {redirect&&<Redirect to="/event" />}
         </Container>
     )
-
-
 }
 
 export default AddEvent

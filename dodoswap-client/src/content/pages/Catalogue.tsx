@@ -1,6 +1,6 @@
 //packages
-import React, { FormEvent, useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 
@@ -15,8 +15,8 @@ interface CatalogueProps {
 const Catalogue: React.FC<CatalogueProps> = props => {
     let [catItems, setCatItems] = useState([])
     let [fetchUser, setFetchUser] = React.useState<String | null>('')
-    let [fetchWish, setFetchWish] = React.useState<String>('')
-    let [inventory, setInventory] = React.useState<String>('')
+    // let [fetchWish, setFetchWish] = React.useState<String>('')
+    // let [inventory, setInventory] = React.useState<String>('')
 
     
     const handleWishList = ((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +45,6 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     const handleInventory = ((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let token = localStorage.getItem('boilerToken')
-        console.log('added to inventory') 
         if (props.user) {
             setFetchUser(props.user._id)
             fetchUser = props.user._id
