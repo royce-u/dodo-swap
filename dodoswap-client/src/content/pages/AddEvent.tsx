@@ -5,6 +5,7 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 //custom components
 import { Decoded } from '../../App'
 import { Redirect } from 'react-router-dom';
+import moment from 'moment'
 
 interface NewEventProps {
     user: Decoded | null,
@@ -26,7 +27,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
         //     date: value,
         //     time: name
         // })
-        console.log(date)
+        console.log(typeof(date))
         console.log('props.use------->',props.user)
 
     }
@@ -68,6 +69,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
         //return loading spinner
         return null
     }
+    console.log(date)
     let idee = props.user._id ? props.user._id: undefined
    
     return (

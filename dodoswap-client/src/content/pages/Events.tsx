@@ -15,6 +15,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 interface EventProps {
     user: Decoded | null
+    
 }
 
 const Event:React.FC<EventProps> = props => {

@@ -89,7 +89,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     },[])
 
     if (props.user) {            
-        let display = catItems.slice(0,10).map((c: any) => {
+        let display = catItems.map((c: any) => {
             return (
                     <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
                     <Image src={c.image} alt={c.name}/>
