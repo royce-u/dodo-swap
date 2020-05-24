@@ -42,6 +42,7 @@ router.post('/', (req: Request, res: Response) => {
     db.Event.create(req.body)
         .then((newEvent: EventInterface) => {
             res.send({ newEvent })
+            console.log('logged new event')
         })
         .catch((err: Error) => {
             console.log("error in posting event", err)

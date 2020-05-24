@@ -8,6 +8,7 @@ let bodyParser = require('body-parser')
 
 import express, {Request, Response } from 'express'
 
+
 // Instantiate app
 let app = express()
 let rowdyResults = rowdyLogger.begin(app)

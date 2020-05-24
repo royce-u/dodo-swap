@@ -1,7 +1,9 @@
 //packages
 import React, { useState, useEffect } from 'react'
+
 import { Link} from 'react-router-dom'
-import { Button, Container, Grid, Icon } from 'semantic-ui-react'
+import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
+
 
 
 //custom components
@@ -15,8 +17,8 @@ interface CatalogueProps {
 const Catalogue: React.FC<CatalogueProps> = props => {
     let [catItems, setCatItems] = useState([])
     let [fetchUser, setFetchUser] = React.useState<String | null>('')
-    let [fetchWish, setFetchWish] = React.useState<String>('')
-    let [inventory, setInventory] = React.useState<String>('')
+    // let [fetchWish, setFetchWish] = React.useState<String>('')
+    // let [inventory, setInventory] = React.useState<String>('')
 
 
     const handleWishList = ((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +47,6 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     const handleInventory = ((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let token = localStorage.getItem('boilerToken')
-        console.log('added to inventory')
         if (props.user) {
             setFetchUser(props.user._id)
             fetchUser = props.user._id
@@ -89,11 +90,13 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             })
     }, [])
 
+
     if (props.user) {
         let display = catItems.slice(0, 10).map((c: any) => {
             return (
                 <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
-                    <img src={`${c.image}`} alt={`{${c.name}}`} />
+                    <Image src={`${c.image}`} alt={`{${c.name}}`} />
+
                     <Link to={`/catalogue/${c._id}`}>{c.name}</Link>
                     <Button.Group>
                         <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}>
