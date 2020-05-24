@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose'
 import {ItemInterface} from './item'
 
 
+
 // Create Event interface extending mongoose.Document (which includes ._id)
 export interface EventInterface extends mongoose.Document {
     hostId: string;
@@ -13,6 +14,7 @@ export interface EventInterface extends mongoose.Document {
     }[];
     date: Date;
     time: string; 
+    description: string;
     maxVisitor: number;
     dodoCode: string;
     comments: {
@@ -34,7 +36,8 @@ let commentSchema: mongoose.Schema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    comment: String
 })
 //Create Event Schema
 let eventSchema: mongoose.Schema = new mongoose.Schema({
@@ -43,6 +46,7 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    description: String,
     attendees: [
         {
         attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 

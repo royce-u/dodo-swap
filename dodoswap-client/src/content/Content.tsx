@@ -30,7 +30,7 @@ const Content: React.FC<ContentProps> = props => {
         () => <Catalogue user={props.user}/>
       } />
       <Route path="/event" render={
-        () => <Event updateToken={props.updateToken} user={props.user}/>
+        () => <Event user={props.user}/>
       } />
       <Route path="/event/new" render={
         () => <AddEvent updateToken={props.updateToken} user={props.user}/>
