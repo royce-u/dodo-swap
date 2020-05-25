@@ -9,6 +9,7 @@ import {EventInterface} from './Events'
 interface CalendarProps {
     user: Decoded | null
     calendarEvents: EventInterface[]
+   
 }
 
 const EventCards: React.FC<CalendarProps> = props => {

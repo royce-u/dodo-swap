@@ -11,6 +11,7 @@ import EventCards from './EventCards'
 
 interface EventProps {
     user: Decoded | null
+    
 }
 
 

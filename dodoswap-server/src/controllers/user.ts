@@ -131,6 +131,11 @@ router.get('/:id', (req: Request, res: Response) => {
         })
 })
 
-
+// //GET /user/events (displays My Events)
+// router.get('/myevents', (req: Request, res: Response) => {
+//     db.Event.find({
+//             hostId: req.user._id
+//         })
+// })
 
 module.exports = router

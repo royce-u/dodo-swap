@@ -1,6 +1,6 @@
 // Import packages
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, RouteProps } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 // import { ReactDom } from 'react-dom'
 
@@ -29,12 +29,19 @@ export interface User {
   validPassword(user:User, password: string): boolean
 }
 
-
 //Interface for decoded type
-export interface Decoded extends User {
+export interface Decoded extends User{
   exp: number;
   _id: string | null;
 }
+
+export interface RouteInfo extends RouteProps{
+  params: {
+    id: string
+  }
+}
+
+
 
 const App: React.FC = () => {
   // Declare state variables (where the token lives)
