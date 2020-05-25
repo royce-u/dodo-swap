@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Route } from 'react-router-dom'
 
 import Signup from './Signup'
 import { Decoded } from '../../App'
