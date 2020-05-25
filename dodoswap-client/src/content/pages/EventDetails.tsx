@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 
 
 import {Container} from 'semantic-ui-react'
-import { Decoded, RouteInfo } from '../../App'
-import { RouteComponentProps, useParams } from 'react-router-dom'
+import { Decoded } from '../../App'
+import { useParams } from 'react-router-dom'
 
 interface EventDetailsProps {
     user?: Decoded | null

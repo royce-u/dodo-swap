@@ -4,7 +4,7 @@ let db = require('../models')
 let jwt = require('jsonwebtoken')
 
 import { Request, Response, Router } from 'express'
-import User, { UserInterface } from '../models/user'
+import { UserInterface } from '../models/user'
 
 const router = Router()
 

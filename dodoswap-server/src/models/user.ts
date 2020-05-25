@@ -45,7 +45,10 @@ let userSchema: mongoose.Schema = new mongoose.Schema({
     userName: String,
     islandName: String,
     nativeFruit: String,
-    pic: String,
+    pic: {
+        type: String,
+        default: 'https://vignette.wikia.nocookie.net/animalcrossing/images/2/2a/Airlines-char-1-2x.png/revision/latest?cb=20200221010843'
+    },
     ratings: [{type: mongoose.Schema.Types.ObjectId, ref: 'Rating'}],
     inventory: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
     wishList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
