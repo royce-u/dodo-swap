@@ -84,7 +84,7 @@ const ProfileModal: React.FC<ModalProps> = props => {
                 </Form.Field>
             </Modal.Content>
             <Modal.Actions>
-                <Button color='green' type="submit" positive>Update</Button>
+                <Button color='green' type="submit" >Update</Button>
             </Modal.Actions>
         </Modal>
     )

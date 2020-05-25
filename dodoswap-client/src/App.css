@@ -22,3 +22,10 @@ footer {
 }
 
 
+img {
+  display: block;
+  margin: 0;
+}
+#catPic {
+  margin: 0 auto;
+}

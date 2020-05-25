@@ -31,11 +31,11 @@ const Content: React.FC<ContentProps> = props => {
       <Route path="/catalogue" render={
         () => <Catalogue user={props.user}/>
       } />
+      <Route path="/newevent" render={
+        () => <AddEvent updateToken={props.updateToken} user={props.user}/>
+      } />
       <Route path="/event" render={
         () => <Events user={props.user}/>
-      } />
-      <Route path="/event/new" render={
-        () => <AddEvent updateToken={props.updateToken} user={props.user}/>
       } />
 
     </div>

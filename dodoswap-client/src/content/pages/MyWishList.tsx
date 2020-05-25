@@ -1,6 +1,6 @@
 //packages
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, Image } from 'semantic-ui-react'
+import { Container, Grid, Header, Image, Table } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
 
@@ -37,18 +37,28 @@ const MyWishList:React.FC<MyWishListProps> = props => {
 
     let display = myWishList.map((w:any) => {
         return(
-            <div key={w._id}>
-                <Image className="tiny" src={w.image} alt={w.name} />
-                <p>{w.name}</p>
-            </div>
+            <Grid.Column>
+                <Grid.Row key={w._id} columns={2} divided>
+                <Grid.Column width={2}>
+                    <Image className="tiny" src={w.image} alt={w.name} />
+                </Grid.Column>
+                <Grid.Column width={2}>
+                    <p>{w.name}</p>
+                    <p>{w.variation}</p>
+                </Grid.Column>
+            </Grid.Row>
+            </Grid.Column>
         )
     })
     
     return(
         <Container>
-            <Grid.Row>
-                <Grid.Column>{display}</Grid.Column>
-            </Grid.Row>
+            <Grid columns={2} divided>
+              <Grid.Row> 
+                {display}
+              </Grid.Row>
+                 
+            </Grid>
         </Container>
     )
 }

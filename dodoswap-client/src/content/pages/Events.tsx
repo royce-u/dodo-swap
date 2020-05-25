@@ -66,6 +66,7 @@ const Events:React.FC<EventProps> = props => {
     
     return (
         <Container>
+            <h1>All Events</h1>
             <EventCards user={props.user} calendarEvents={events}/>
         </Container>
         

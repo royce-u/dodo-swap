@@ -46,7 +46,6 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    description: String,
     attendees: [
         {
         attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 

@@ -1,8 +1,8 @@
 //packages
 import React, { useState, useEffect } from 'react'
 
-import { Link} from 'react-router-dom'
-import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Container, Grid, Icon, Image, Card } from 'semantic-ui-react'
 
 
 
@@ -72,28 +72,6 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-<<<<<<< HEAD
-          })
-          .then(response => {
-              response.json()
-              .then(data => {
-                  console.log('data: ',data)
-                  if (data){
-                      setCatItems(data.items)
-                  }
-              })
-              .catch(innErr => {
-                  console.log('inner catch: ',innErr)
-              })
-          })
-          .catch(err => {
-              console.log('error with fetch call: ', err)
-          })
-    },[])
-
-    if (props.user) {            
-        let display = catItems.map((c: any) => {
-=======
         })
             .then(response => {
                 response.json()
@@ -112,33 +90,40 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             })
     }, [])
 
-
     if (props.user) {
-        let display = catItems.slice(0, 10).map((c: any) => {
->>>>>>> a5d4e0e7505f44455d709dc6629b5626a8141970
+        let display = catItems.map((c: any) => {
             return (
-                <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
-                    <Image src={`${c.image}`} alt={`{${c.name}}`} />
-
-                    <Link to={`/catalogue/${c._id}`}>{c.name}</Link>
-                    <Button.Group>
-                        <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}>
-                            <Icon name='heart' />
-                        </Button>
-
-                        <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleInventory(e)} value={c._id}>
-                            <Icon name='plus square outline' />
-                        </Button>
-                    </Button.Group>
+                <Grid.Column>
+                    <Grid.Row>
+                        <Image src={`${c.image}`} alt={`{${c.name}}`} id="catPic" />
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Link to={`/catalogue/${c._id}`}>{c.name}</Link>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Button.Group>
+                            <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}>
+                                <Icon name='heart' />
+                            </Button>
+                            <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleInventory(e)} value={c._id}>
+                                <Icon name='plus square outline' />
+                            </Button>
+                        </Button.Group>
+                    </Grid.Row>
                 </Grid.Column>
+
+
             )
         })
         return (
             <Container>
                 <h1>Catalogue Page</h1>
                 <Grid>
-                    {display}
+                    <Grid.Row columns={5}>
+                        {display}
+                    </Grid.Row>
                 </Grid>
+
             </Container>
         )
     }
