@@ -6,7 +6,7 @@ import { Decoded } from '../../App'
 
 interface MyInventoryProps {
     user?: Decoded | null
-    
+
 }
 
 const MyInventory: React.FC<MyInventoryProps> = props => {
@@ -35,26 +35,26 @@ const MyInventory: React.FC<MyInventoryProps> = props => {
             })
     }, [])
 
-    
-        let display = myInv.map((m: any) => {
-            return (
-                <div key={m._id}>
-                    <Image className="tiny" src={m.image} alt={m.name} />
-                    <p>{m.name}</p>
-                </div>
-            )
-        })
+
+    let display = myInv.map((m: any) => {
         return (
-            <Container>
-               <Grid colums={3} divided>
-                   <Grid.Row>
-                        <Grid.Column>{display}</Grid.Column>
-                   </Grid.Row>
-                
-               </Grid>
-            </Container>
-           
+            <div key={m._id}>
+                <Image className="tiny" src={m.image} alt={m.name} />
+                <p>{m.name}</p>
+            </div>
         )
+    })
+    return (
+        <Container>
+            <Grid columns={3} divided>
+                <Grid.Row>
+                    <Grid.Column>{display}</Grid.Column>
+                </Grid.Row>
+
+            </Grid>
+        </Container>
+
+    )
 
 }
 

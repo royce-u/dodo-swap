@@ -9,7 +9,7 @@ import Events from './pages/Events'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import { Decoded } from '../App'
-import EventCards from './pages/EventCards'
+import EventDetails from './pages/EventDetails'
 
 
 //props
@@ -36,6 +36,9 @@ const Content: React.FC<ContentProps> = props => {
       } />
       <Route path="/event" render={
         () => <Events user={props.user}/>
+      } />
+      <Route path="/events/:id" render={
+        () => <EventDetails user={props.user}/>
       } />
 
     </div>

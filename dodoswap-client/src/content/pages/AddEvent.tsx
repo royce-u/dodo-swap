@@ -73,6 +73,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
    
     return (
         <Container>
+            <h1>Add an Event</h1>
             <Form onSubmit={(e) =>handleSubmit(e)}>
                 <Form.Group>
                     <Form.Field>
@@ -95,7 +96,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
                 </Form.Group>
                 <Form.Field onChange={(e:any) => sethostDescription(e.target.value)}value={hostDescription} label='Description' control='textarea' rows='3' name="comments" />
                 <input type="hidden" value={idee} name="hostId" />
-                <Button type="submit" >Create Event</Button>
+                <Button type="submit" color="blue" >Create Event</Button>
 
             </Form>
             {redirect&&<Redirect to="/event" />}

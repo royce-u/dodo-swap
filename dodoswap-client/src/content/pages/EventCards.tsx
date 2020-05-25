@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Card, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 //custom components
@@ -11,7 +12,7 @@ interface CalendarProps {
 }
 
 const EventCards: React.FC<CalendarProps> = props => {
-
+console.log("CALENDAR EVENTS", props.calendarEvents)
 
     let calendarInput = props.calendarEvents.map((c:any) =>{ 
             
@@ -27,7 +28,7 @@ const EventCards: React.FC<CalendarProps> = props => {
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='blue'>
+          <Button basic color='blue' as={Link} to={`/events/${c._id}`}>
             More details…
           </Button>
         </div>
@@ -43,7 +44,9 @@ const EventCards: React.FC<CalendarProps> = props => {
     return (
 
         <Container>
-        {calendarInput}
+          <Card.Group>
+          {calendarInput}
+          </Card.Group>
         </Container>
 
     )
