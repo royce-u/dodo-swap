@@ -1,19 +1,16 @@
+require('dotenv').config()
 let db = require('../models')
 let jwt = require('jsonwebtoken')
 
 import mongoose from 'mongoose'
 import { Request, Response, Router } from 'express'
 import { UserInterface } from '../models/user'
-import { ItemInterface } from '../models/item'
+
 
 interface RequestInterface extends Request {
     user?: UserInterface
 }
 
-// //check is item
-// function isItem(obj: ItemInterface[] | any) : obj is ItemInterface[] {
-//     return true
-// }
 
 const router = Router()
 //GET / (display user profile page using token)
@@ -69,19 +66,21 @@ router.get('/edit', (req: RequestInterface, res: Response) => {
 
 //PUT /user/ (update user profile)
 router.put('/', (req: Request, res: Response) => {
-    console.log("REQ BODY----", req.body)
-    db.User.updateOne({ _id: (req.body as { id: string }).id }, { $set: req.body })
+    db.User.updateOne({ _id: (req.body as{id: string}).id }, req.body)
+    .then(() => {
+        db.User.findOne({_id: (req.body as{id: string}).id })
         .then((user: UserInterface) => {
-            //Reissue token with updated user info
+            // Reissues token
             let token: string = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
                 expiresIn: 60 * 60 * 8 //8 hours in seconds
             })
             res.send({ token })
         })
-        .catch((err: Error) => {
-            console.log(err)
-            res.send({ err })
-        })
+    })
+    .catch((error: Error) => {
+        console.log(error)
+        res.status(500).send({ message: 'Server Error' })
+    })
 })
 
 

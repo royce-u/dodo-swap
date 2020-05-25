@@ -120,7 +120,7 @@ const ProfileBox: React.FC<ProfileBoxProps> = props => {
                             <Header>
                                 <Header.Content>
                                     <Header.Subheader >
-                                        <ProfileModal user={props.user} />
+                                        <ProfileModal user={props.user} updateToken={props.updateToken} />
                                     </Header.Subheader>
                                 </Header.Content>
                             </Header>

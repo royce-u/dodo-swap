@@ -2,9 +2,9 @@
 import React, { useState, useEffect, FormEvent } from 'react'
 
 
-import { Button, Container } from 'semantic-ui-react'
-import { Decoded, RouteInfo } from '../../App'
-import { Redirect, RouteComponentProps, useParams } from 'react-router-dom'
+import {Container} from 'semantic-ui-react'
+import { Decoded } from '../../App'
+import { useParams } from 'react-router-dom'
 
 interface EventDetailsProps {
     user?: Decoded | null
