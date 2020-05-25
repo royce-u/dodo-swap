@@ -73,7 +73,7 @@ const Login: React.FC<LoginProps> = props => {
           <Input label="Password" type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}/>
         </Menu.Item>
         <Menu.Item>
-        <Button color="blue" size={"tiny"} content="Login" icon="right arrow" labelPosition="right" type="submit"/>
+        <Button color="blue" size={"tiny"} content="Login" icon="sign-in" labelPosition="right" type="submit"/>
         </Menu.Item>
         </Form.Group>
       </Form>

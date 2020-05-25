@@ -12,11 +12,11 @@ interface SignupProps {
 
 const Signup: React.FC<SignupProps> = props => {
   // Declare and initialize state variables
-  let [email, setEmail] = React.useState<String>('')
-  let [firstname, setFirstname] = React.useState<String>('')
-  let [lastname, setLastname] = React.useState<String>('')
-  let [message, setMessage] = React.useState<String>('')
-  let [password, setPassword] = React.useState<String>('')
+  let [email, setEmail] = useState<String>('')
+  let [firstname, setFirstname] = useState<String>('')
+  let [lastname, setLastname] = useState<String>('')
+  let [message, setMessage] = useState<String>('')
+  let [password, setPassword] = useState<String>('')
 
   
   const handleSubmit = (e: FormEvent) => {
@@ -66,8 +66,7 @@ const Signup: React.FC<SignupProps> = props => {
 
   return (
 
-    <Container className="center-form">
-      
+    <Container className="center-form">   
       <Grid columns={2} verticalAlign="middle">
         <Grid.Row>
           <Grid.Column >
@@ -81,21 +80,21 @@ const Signup: React.FC<SignupProps> = props => {
               <Form.Group>
                 <Form.Field>
                   <label>First Name</label>
-                <Input name="firstname" placeholder="Your first name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} />
+                <Input name="firstname" placeholder="Your first name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstname(e.target.value)} required/>
                 </Form.Field>
                 <Form.Field>
                 <label>Last Name</label>
-                <Input name="lastname" placeholder="Your last name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} />
+                <Input name="lastname" placeholder="Your last name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)} required/>
                 </Form.Field>
               </Form.Group>
               <Form.Group>
                 <Form.Field>
                   <label>Email</label>
-                <Input type="email" placeholder="Your email"name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                <Input type="email" placeholder="Your email"name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} required/>
                 </Form.Field>
                 <Form.Field>
                   <label>Password</label>
-                <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+                <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} required/>
                 </Form.Field>
               </Form.Group>
               <Button type="submit">Sign Me Up!</Button>
