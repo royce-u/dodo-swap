@@ -22,13 +22,13 @@ const AddEvent: React.FC<NewEventProps> = props => {
 
 
     const handleChangeDate = (e:FormEvent,{goat, value}:any) => {
-        setDate(value)
-        // setEventInfo({
-        //     date: value,
-        //     time: name
-        // })
-        console.log(typeof(date))
-        console.log('props.use------->',props.user)
+            //convert input date to satisfy the requirements of full-calendar-react
+            //split string by "-"
+            let result = value.split('-')
+            //reorder and added "-"
+            let result2 = ([result[2], result[0], result[1]]).join('-')
+            //set date
+            setDate(result2)
 
     }
     const handleChangeTime = (e:any,{name, value}:any) => {

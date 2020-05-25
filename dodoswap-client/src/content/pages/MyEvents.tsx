@@ -8,6 +8,8 @@ const MyEvents: React.FC = props => {
     //fetch call to grab the events
     // fetch(process.env.REACT_APP_SERVER_URL + 'user/')
 
+    
+
     return(
         //return events
         <div>
