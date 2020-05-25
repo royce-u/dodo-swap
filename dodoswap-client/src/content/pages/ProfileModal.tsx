@@ -33,7 +33,7 @@ const ProfileModal: React.FC<ModalProps> = props => {
                 id: idee,
                 firstname: firstname,
                 lastname: lastname,
-                acName: acName,
+                userName: acName,
                 islandName: islandName,
                 nativeFruit: nativeFruit,
                 pic: pic
