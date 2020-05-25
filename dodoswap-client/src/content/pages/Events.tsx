@@ -1,6 +1,6 @@
 //packages
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 
 
 

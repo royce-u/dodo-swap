@@ -91,7 +91,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     }, [])
 
     if (props.user) {
-        let display = catItems.map((c: any) => {
+        let display = catItems.slice(0,20).map((c: any) => {
             return (
                 <Grid.Column>
                     <Grid.Row>

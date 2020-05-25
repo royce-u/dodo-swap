@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Decoded } from '../../App'
-import { Container, Grid, Header, Image, Tab, Table } from 'semantic-ui-react'
+import { Container, Tab, } from 'semantic-ui-react'
 
 import MyEvents from './MyEvents'
 import MyInventory from './MyInventory'

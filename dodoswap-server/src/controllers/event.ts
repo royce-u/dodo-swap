@@ -27,6 +27,7 @@ router.get('/:id', (req: Request, res: Response) => {
     console.log("EVENTS ONE-", (req.params as { id: string }).id)
     db.Event.findById((req.params as { id: string }).id)
     .populate('attendees')
+    .populate('hostId')
         .then((event: EventInterface | null) => {
             console.log("event returned--", event)
             res.send({ event })
@@ -62,7 +63,7 @@ router.post('/', (req: Request, res: Response) => {
         })
 })
 
-//PUT /event (update event when other users joint)
+//PUT /event (update event when other users join)
 router.put('/', (req: RequestInterface, res: Response) => {
     console.log("REQ BODY----", req.body)
     req.body.top5 = req.body.top5 ? (Array.isArray(req.body.top5) ? req.body.top5 : [req.body.top5]) : []
