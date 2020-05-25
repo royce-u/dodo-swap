@@ -2,30 +2,57 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
+
+
+
 //custom components
 import { Decoded } from '../../App'
-
+import EventCards from './EventCards'
 
 interface EventProps {
     user: Decoded | null
 }
 
-const Event:React.FC<EventProps> = props => {
+
+export interface EventInterface {
+    hostId: string;
+    private: boolean;
+    attendees: {
+        attendeeId: string,
+        top5: string[]
+        toBring: string[]
+    }[];
+    date: string;
+    time: string; 
+    description: string;
+    maxVisitor: number;
+    dodoCode: string;
+    comments: {
+        author: string,
+        date: Date,
+        comment: string
+    };
+}
+
+const Events:React.FC<EventProps> = props => {
     let [events, setEvents] = useState([])
-    //on load - fetch all events
+    
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
         fetch(process.env.REACT_APP_SERVER_URL + 'event', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type': "application/json",
+                'Authorization':  `Bearer ${token}`
             }
         })
         .then(response => {
             response.json()
             .then(data => {
+                console.log(data)
                 setEvents(data.events)
+                console.log(typeof(data.events))
+                
             })
             .catch(innErr => {
                 console.log(innErr)
@@ -34,29 +61,14 @@ const Event:React.FC<EventProps> = props => {
         .catch(err => {
             console.log(err)
         })
-    },[])
+    }, [])
 
-    if (!props.user){
-        return null
-    }
-
-    let display = events.map((e:any) => {
-        return (
-            <div key={e._id}>
-                <p>{e.date}</p>
-                <p>{e.time}</p>
-                <p>{e.maxVisitor}</p>
-            </div>
-        )
-    })
-
+    
     return (
-        <div>
-            <Container>
-            <h1>Events Page STUB</h1>
-                <Grid.Column>{display}</Grid.Column>
-            </Container>
-        </div>
+        <Container>
+            <EventCards user={props.user} calendarEvents={events}/>
+        </Container>
+        
     )
 }
-    export default Event
+    export default Events

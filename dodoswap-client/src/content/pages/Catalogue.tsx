@@ -72,6 +72,28 @@ const Catalogue: React.FC<CatalogueProps> = props => {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
+<<<<<<< HEAD
+          })
+          .then(response => {
+              response.json()
+              .then(data => {
+                  console.log('data: ',data)
+                  if (data){
+                      setCatItems(data.items)
+                  }
+              })
+              .catch(innErr => {
+                  console.log('inner catch: ',innErr)
+              })
+          })
+          .catch(err => {
+              console.log('error with fetch call: ', err)
+          })
+    },[])
+
+    if (props.user) {            
+        let display = catItems.map((c: any) => {
+=======
         })
             .then(response => {
                 response.json()
@@ -93,6 +115,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
 
     if (props.user) {
         let display = catItems.slice(0, 10).map((c: any) => {
+>>>>>>> a5d4e0e7505f44455d709dc6629b5626a8141970
             return (
                 <Grid.Column mobile={16} tablet={8} computer={4} key={c._id} className="center">
                     <Image src={`${c.image}`} alt={`{${c.name}}`} />

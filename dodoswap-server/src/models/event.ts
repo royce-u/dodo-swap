@@ -12,7 +12,7 @@ export interface EventInterface extends mongoose.Document {
         top5: ItemInterface[],
         toBring: ItemInterface[]
     }[];
-    date: Date;
+    date: String;
     time: string; 
     description: string;
     maxVisitor: number;
@@ -54,7 +54,7 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
         toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
         }
     ], 
-    date: Date,
+    date: String,
     time: String,
     description: String,
     maxVisitor: {

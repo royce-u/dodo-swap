@@ -5,10 +5,12 @@ import { Route } from 'react-router-dom'
 // Custom components
 import AddEvent from './pages/AddEvent'
 import Catalogue from './pages/Catalogue'
-import Event from './pages/Events'
+import Events from './pages/Events'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import { Decoded } from '../App'
+import EventCards from './pages/EventCards'
+
 
 //props
 interface ContentProps {
@@ -30,7 +32,7 @@ const Content: React.FC<ContentProps> = props => {
         () => <Catalogue user={props.user}/>
       } />
       <Route path="/event" render={
-        () => <Event user={props.user}/>
+        () => <Events user={props.user}/>
       } />
       <Route path="/event/new" render={
         () => <AddEvent updateToken={props.updateToken} user={props.user}/>

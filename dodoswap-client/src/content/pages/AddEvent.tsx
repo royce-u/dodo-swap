@@ -5,6 +5,7 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 //custom components
 import { Decoded } from '../../App'
 import { Redirect } from 'react-router-dom';
+import moment from 'moment'
 
 interface NewEventProps {
     user: Decoded | null,
@@ -21,13 +22,13 @@ const AddEvent: React.FC<NewEventProps> = props => {
 
 
     const handleChangeDate = (e:FormEvent,{goat, value}:any) => {
-        setDate(value)
-        // setEventInfo({
-        //     date: value,
-        //     time: name
-        // })
-        console.log(date)
-        console.log('props.use------->',props.user)
+            //convert input date to satisfy the requirements of full-calendar-react
+            //split string by "-"
+            let result = value.split('-')
+            //reorder and added "-"
+            let result2 = ([result[2], result[0], result[1]]).join('-')
+            //set date
+            setDate(result2)
 
     }
     const handleChangeTime = (e:any,{name, value}:any) => {
@@ -68,6 +69,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
         //return loading spinner
         return null
     }
+    console.log(date)
     let idee = props.user._id ? props.user._id: undefined
    
     return (
