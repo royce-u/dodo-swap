@@ -41,6 +41,17 @@ router.get('/:id', (req: Request, res: Response) => {
 router.post('/', (req: Request, res: Response) => {
     db.Event.create(req.body)
         .then((newEvent: EventInterface) => {
+            console.log('new new ---------.',newEvent)
+            db.User.updateOne({_id: (req.body as {hostId: string}).hostId},
+            {$push:{
+                events: newEvent._id
+            }
+            })
+            .then((updatedUser: UserInterface) => {
+                console.log('updatedUser--->', updatedUser)
+            })
+            .catch((innErr: Error) => {
+                console.log(innErr)})
             res.send({ newEvent })
             console.log('logged new event')
         })

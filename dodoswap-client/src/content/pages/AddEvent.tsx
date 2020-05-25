@@ -64,7 +64,6 @@ const AddEvent: React.FC<NewEventProps> = props => {
         setRedirect(true)
         
     })
-
     if (!props.user){
         //return loading spinner
         return null
