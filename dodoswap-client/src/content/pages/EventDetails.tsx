@@ -1,6 +1,7 @@
 //packages
 import React, { useState, useEffect} from 'react'
 import {Button, Container} from 'semantic-ui-react'
+
 import { Decoded } from '../../App'
 import { Redirect, useParams } from 'react-router-dom'
 
@@ -13,7 +14,6 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
     let [message, setMessage] = useState('')
     let [fetchUser, setFetchUser] = useState<String | null>('')
     let [referRedirect, setReferRedirect] = useState(false)
-    let [spotsLeft, setSpotsLeft] = useState<number>(0)
     //actual event details
     const [eventDetails, setEventDetails] = useState({
         date: String,
@@ -39,10 +39,10 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
     //Button to join event (if not the host)
     const handleJoin = ((e: React.MouseEvent<HTMLButtonElement>) => {
         let token = localStorage.getItem('boilerToken')
-        if(props.user){
+        if (props.user) {
             setFetchUser(props.user._id)
             fetchUser = props.user._id
-            
+
             fetch(process.env.REACT_APP_SERVER_URL + 'event', {
                 method: 'PUT',
                 body: JSON.stringify({
@@ -56,23 +56,21 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then( (response: Response) => {
-                response.json()
-                .then( result => {
-                    if (response.ok) {
-                        props.updateToken( result.token )
-                        setReferRedirect(true)
-                        setSpotsLeft(spotsLeft-1)
-                    } else {
-                        setMessage(`${response.status} ${response.statusText}: ${result.message}`)
-                        console.log(message)
-                    }
+                .then((response: Response) => {
+                    response.json()
+                        .then(result => {
+                            if (response.ok) {
+                                props.updateToken(result.token)
+                                setReferRedirect(true)
+                            } else {
+                                setMessage(`${response.status} ${response.statusText}: ${result.message}`)
+                            }
+                        })
                 })
-            })
-            .catch( (err: Error) => {
-                console.log(err)
-                setMessage(`${err.toString()}`)
-            })
+                .catch((err: Error) => {
+                    console.log(err)
+                    setMessage(`${err.toString()}`)
+                })
         }
     })
 
@@ -94,7 +92,6 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                         setEventDetails(data.event)
                         setHostInfo(data.event.hostId)
                         // console.log(hostInfo.nativeFruit)
-
                     })
                     .catch(innErr => {
                         console.log(innErr)
@@ -103,42 +100,53 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
             .catch(err => {
                 console.log(err)
             })
-    }, [spotsLeft])
+    }, [])
 
     if (referRedirect) {
-        return(
-            <Redirect to = "/user" />
+        return (
+            <Redirect to="/user" />
         )
     }
     //null check so we can get props.user to work
-    if (!props.user ) {
+    if (!props.user) {
         return null
-        // console.log(eventDetails.hostId)
     }
     
+    //Future features: 
     //if user is host - show detail && cancel event button
     //else if user is not host - display join button
     //else if maxvisitor == attendees.count show event details & "event closed"
-
+    let list = ['Bring 5-10 items to share with others.', 
+    'DIY Crafted, Saharah and Mom Items cannot be catalogued.',
+    `Keep track of the items you bring and DO NOT take other people's items.`, 
+    'Wait for the host to indicate where you should set up and when it is your turn to catalogue.',
+    'Ask host before wandering away from cataloguing area or doing anything else, such as picking fruit or shopping.',
+    'Have fun!']
     return (
         <Container>
             <h1>Event Details</h1>
-            {/* <p><{eventDetails.hostId.firstName}</p> */}
-            <Message color='teal' attached header="Community Guidelines" />
-            <Message >
-            <Message.Header>Date: {eventDetails.date}</Message.Header>
-            <p>{eventDetails.time}</p>
-            <p>Max Visitors: {eventDetails.maxVisitor}</p>
-            <p>Spots Left: {spotsLeft}</p>
-            <p>Hosted by: {hostInfo.userName}</p>
-            <p>Island: {hostInfo.islandName}</p>
-            <p>Attendees: </p>
-            <p>{eventDetails.description}</p>
-            <Button onClick={handleJoin} color="blue">Join</Button>
-            </Message>
+            <Grid>
+            <Grid.Row>
+                </Grid.Row>
+                <Grid.Row stretched>
+                    <Grid.Column width={6}>
+                        <Message color='teal' attached header="Community Guidelines" list={list} />
+                    </Grid.Column>
+                    <Grid.Column width={10}>
+                    <Message >
+                        <Message.Header>Date: {eventDetails.date}</Message.Header>
+                        <p>{eventDetails.time}</p>
+                        <p>Max Visitors: {eventDetails.maxVisitor}</p>
+                        <p>Hosted by: {hostInfo.userName}</p>
+                        <p>Island: {hostInfo.islandName}</p>
+                        <p>{eventDetails.description}</p>
+                        <Button onClick={handleJoin} color="blue">Join</Button>
+                    </Message>
+                    </Grid.Column>
+                </Grid.Row>               
+            </Grid>
         </Container>
     )
-
 }
 
 export default EventDetails

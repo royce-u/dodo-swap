@@ -9,7 +9,7 @@ interface MyWishListProps {
 }
 
 
-const MyWishList:React.FC<MyWishListProps> = props => {
+const MyWishList: React.FC<MyWishListProps> = props => {
     let [myWishList, setMyWishList] = useState([])
 
     useEffect(() => {
@@ -21,45 +21,40 @@ const MyWishList:React.FC<MyWishListProps> = props => {
                 'Authorization': `Bearer ${token}`
             }
         })
-        .then(response => {
-            (response.json())
-            .then(data => {
-                setMyWishList(data.user.wishList)
+            .then(response => {
+                (response.json())
+                    .then(data => {
+                        setMyWishList(data.user.wishList)
+                    })
+                    .catch(innErr => {
+                        console.log(innErr)
+                    })
             })
-            .catch(innErr => {
-                console.log(innErr)
+            .catch(err => {
+                console.log(err)
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    },[])
+    }, [])
     console.log(myWishList)
 
-    let display = myWishList.map((w:any) => {
-        return(
-            <Grid.Column>
-                <Grid.Row key={w._id} columns={2} divided>
-                <Grid.Column width={2}>
-                    <Image className="tiny" src={w.image} alt={w.name} />
-                </Grid.Column>
-                <Grid.Column width={2}>
-                    <p>{w.name}</p>
-                    <p>{w.variation}</p>
-                </Grid.Column>
-            </Grid.Row>
+    let display = myWishList.map((w: any) => {
+        return (
+            <Grid.Column key={w._id} >
+                <Image size="tiny" src={w.image} alt={w.name} />
+                <p>{w.name}</p>
+                <p>{w.variation}</p>
             </Grid.Column>
+
         )
     })
-    
-    return(
+
+    return (
         <Container>
-            <Grid columns={2} divided>
-              <Grid.Row> 
+            <Grid columns={6}>
+            <Grid.Row>
                 {display}
-              </Grid.Row>  
+            </Grid.Row>  
             </Grid>
-        </Container>
+        </Container >
     )
 }
 

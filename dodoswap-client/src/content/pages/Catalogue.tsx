@@ -94,10 +94,10 @@ const Catalogue: React.FC<CatalogueProps> = props => {
                         <Image src={`${c.image}`} alt={`{${c.name}}`} id="catPic" />
                     </Grid.Row>
                     <Grid.Row>
-                        <Link to={`/catalogue/${c._id}`}>{c.name}</Link>
+                        <Link className="catLink" to={`/catalogue/${c._id}`}>{c.name}</Link>
                     </Grid.Row>
                     <Grid.Row>
-                        <Button.Group>
+                        <Button.Group className="catButtons">
                             <Button icon onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleWishList(e)} value={c._id}>
                                 <Icon name='heart' />
                             </Button>
@@ -113,9 +113,9 @@ const Catalogue: React.FC<CatalogueProps> = props => {
         })
         return (
             <Container>
-                <h1>Catalogue Page</h1>
-                <Grid>
-                    <Grid.Row columns={5}>
+                <h1>Catalogue of Items</h1>
+                <Grid stackable relaxed columns={5}>
+                    <Grid.Row >
                         {display}
                     </Grid.Row>
                 </Grid>
@@ -124,10 +124,8 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     }
 
     return (
-        //loading for user 
-        <Container>
-            <Image centered src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB12IXMM.img?h=450&w=799&m=6&q=60&o=f&l=f"/>
-        </Container>
+        // redirect home if not logged in
+        <Redirect to="/" />
     )
 }
 

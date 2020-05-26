@@ -16,6 +16,7 @@ const Nav: React.FC<NavProps> = props => {
     // Remove the token from local storage (or cookies)
     props.updateToken('')
     localStorage.removeItem('boilerToken')
+    
   }
 
   var links = (
@@ -31,11 +32,11 @@ const Nav: React.FC<NavProps> = props => {
   // If the user is logged in, show profile page and logout links
   if (props.user) {
     links = (
-      <Menu pointing secondary>
+      <Menu pointing secondary className="top-nav">
         <Menu.Item
           name='Home'
           href="/"
-        />
+        /> 
         <Menu.Menu position='right'>
           <Menu.Item
             name='Profile'
@@ -45,8 +46,8 @@ const Nav: React.FC<NavProps> = props => {
             name='Catalogue'
             as={Link} to="/catalogue"
           />
-          <Dropdown pointing text="Events" id="event">
-            <Dropdown.Menu>
+          <Dropdown pointing text="Events" id="event" className="top-nav">
+            <Dropdown.Menu >
               <Dropdown.Item as={Link} to= "/event">All Events</Dropdown.Item>
               <Dropdown.Item as={Link} to= "/event/new">Add Event</Dropdown.Item>
             </Dropdown.Menu>
@@ -59,7 +60,6 @@ const Nav: React.FC<NavProps> = props => {
         </Menu.Menu>
       </Menu>
     )
-
   }
 
   return (

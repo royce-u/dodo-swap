@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, List } from 'semantic-ui-react'
 
+
 import { Decoded } from '../../App'
 
 interface MyEventsProps {
@@ -47,19 +48,13 @@ const MyEvents: React.FC<MyEventsProps> = props => {
     }, [])
     // console.log(myEvents)
 
-    
-    // if (!props.user){
-    //     return null
-    // }
-
-    let display = myEvents.map((m: any) => {     
+    let display = myEvents.map((m: any) => {
         return (
 
             <List.Item key={m._id}>
                 <List.Icon name="calendar alternate" size="large" color="blue" verticalAlign="middle"/>
                 <List.Content>
                 <List.Header as={Link} to={`event/${m._id}`}>Date: {m.date} ({m.time})</List.Header>
-                {/* <List.Description>Attendees: {m.attendees}</List.Description> */}
                 <List.Description>{m.description}</List.Description>
             Max Visitors: {m.maxVisitor}
             </List.Content>
