@@ -28,7 +28,6 @@ router.get('/', (req: RequestInterface, res: Response) => {
 router.get('/events', (req: RequestInterface, res: Response) => {
     db.User.findOne({_id: (mongoose.Types.ObjectId(req.user ? req.user._id : ""))})
     .populate('events')
-    .populate('hostId')
         .then((user: UserInterface) => {
             console.log("USER", user)
             // .then(() => {

@@ -1,7 +1,8 @@
 //packages
-import React, { FormEvent, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Grid, Icon, List } from 'semantic-ui-react'
+import { Container, List } from 'semantic-ui-react'
+
 
 import { Decoded } from '../../App'
 
@@ -10,21 +11,19 @@ interface MyEventsProps {
 }
 
 const MyEvents: React.FC<MyEventsProps> = props => {
-    let [myEvents, setMyEvents] = useState([{
+    const [myEvents, setMyEvents] = useState([{
         date: String,
         time: String,
         private: Boolean,
         islandName: String,
         description: String,
         maxVisitor: Number,
-        // attendees: {
-        //     []
-        // }
+        attendees: Array,
         hostId: String,
         _id: String
     }])
 
-
+    //on load - GET MyEvents from user& set state
     useEffect(() => {
         let token = localStorage.getItem('boilerToken')
         fetch(process.env.REACT_APP_SERVER_URL + 'user/events', {
@@ -47,7 +46,7 @@ const MyEvents: React.FC<MyEventsProps> = props => {
                 console.log(err)
             })
     }, [])
-    console.log(myEvents)
+    // console.log(myEvents)
 
     let display = myEvents.map((m: any) => {
         return (
@@ -59,9 +58,7 @@ const MyEvents: React.FC<MyEventsProps> = props => {
                 <List.Description>{m.description}</List.Description>
             Max Visitors: {m.maxVisitor}
             </List.Content>
-            
             </List.Item>
-
         )
     })
 

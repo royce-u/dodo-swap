@@ -1,15 +1,14 @@
 //packages
-import React, { useState, useEffect } from 'react'
-import { Button, Container, Grid, Image, Message } from 'semantic-ui-react'
+import React, { useState, useEffect} from 'react'
+import {Button, Container} from 'semantic-ui-react'
+
 import { Decoded } from '../../App'
 import { Redirect, useParams } from 'react-router-dom'
-
 
 interface EventDetailsProps {
     user?: Decoded | null
     updateToken: (newToken: string | null) => void
 }
-
 
 const EventDetails: React.FC<EventDetailsProps> = props => {
     let [message, setMessage] = useState('')
@@ -23,7 +22,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         islandName: String,
         description: String,
         maxVisitor: Number,
-        attendees: [{}],
+        attendees: Array,
         hostId: String,
         _id: String
     })
@@ -36,8 +35,6 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         lastName: String,
         pic: String
     })
-    //attendee info 
-    const [attendeeInfo, setAttendeeInfo] = useState([])
 
     //Button to join event (if not the host)
     const handleJoin = ((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -94,7 +91,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                     .then(data => {
                         setEventDetails(data.event)
                         setHostInfo(data.event.hostId)
-                        setAttendeeInfo(data.event.attendees)
+                        // console.log(hostInfo.nativeFruit)
                     })
                     .catch(innErr => {
                         console.log(innErr)
@@ -114,14 +111,10 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
     if (!props.user) {
         return null
     }
-    // console.log('props.user', props.user._id)
-    console.log("ATTENDEE INFO", attendeeInfo)
- 
     
     //Future features: 
     //if user is host - show detail && cancel event button
     //else if user is not host - display join button
-
     //else if maxvisitor == attendees.count show event details & "event closed"
     let list = ['Bring 5-10 items to share with others.', 
     'DIY Crafted, Saharah and Mom Items cannot be catalogued.',

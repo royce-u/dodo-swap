@@ -25,10 +25,9 @@ const ProfileBox: React.FC<ProfileBoxProps> = props => {
             }
         })
             .then(response => {
-                console.log('Response', response)
-
                 if (!response.ok) {
                     setSecretMessage('Nice try')
+                    console.log(secretMessage)
                     return
                 }
                 //we did get a good response
@@ -36,6 +35,7 @@ const ProfileBox: React.FC<ProfileBoxProps> = props => {
                     .then(result => {
                         console.log(result)
                         setSecretMessage('HELLLO! WELCOME')
+                        console.log(secretMessage)
                     })
             })
             .catch(err => {

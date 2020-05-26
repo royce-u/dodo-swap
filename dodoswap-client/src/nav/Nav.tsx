@@ -27,13 +27,10 @@ const Nav: React.FC<NavProps> = props => {
       />
       <Login user={props.user} updateToken={props.updateToken} />
     </Menu>
-
-
   )
-  console.log(props.user)
+
   // If the user is logged in, show profile page and logout links
   if (props.user) {
-    console.log("INNER PART")
     links = (
       <Menu pointing secondary className="top-nav">
         <Menu.Item
@@ -63,9 +60,7 @@ const Nav: React.FC<NavProps> = props => {
         </Menu.Menu>
       </Menu>
     )
-
   }
-
 
   return (
     <div>

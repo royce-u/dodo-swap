@@ -81,7 +81,6 @@ const App: React.FC = () => {
       }
       else {
         //the user is valid, token is good
-        console.log('User and token are good')
         setUser(decodedUser)
       }
     }

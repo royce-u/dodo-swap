@@ -1,7 +1,7 @@
 //packages
 import React, { useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import { Button, Container, Grid, Icon, Image, Card } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 
 
@@ -89,7 +89,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     if (props.user) {
         let display = catItems.slice(0,20).map((c: any) => {
             return (
-                <Grid.Column>
+                <Grid.Column key={c._id}>
                     <Grid.Row>
                         <Image src={`${c.image}`} alt={`{${c.name}}`} id="catPic" />
                     </Grid.Row>
