@@ -30,8 +30,8 @@ router.get('/', (req: Request, res: Response) => {
 router.get('/:id', (req: Request, res: Response) => {
     console.log("EVENTS ONE-", (req.params as { id: string }).id)
     db.Event.findById((req.params as { id: string }).id)
-        .populate('attendees')
         .populate('hostId')
+        .populate('attendees.attendeeId')
         .then((event: EventInterface | null) => {
             console.log("event returned--", event)
             res.send({ event })
