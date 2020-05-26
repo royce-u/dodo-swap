@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Decoded } from '../../App'
-import { Grid, Header, Image, Tab, Table } from 'semantic-ui-react'
+import { Grid, Header, Image, Table } from 'semantic-ui-react'
 
 import ProfileModal from './ProfileModal'
 
