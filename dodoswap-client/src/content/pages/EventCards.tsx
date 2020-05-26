@@ -29,7 +29,7 @@ console.log("CALENDAR EVENTS", props.calendarEvents)
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='blue' as={Link} to={`/events/${c._id}`}>
+          <Button basic color='blue' as={Link} to={`/event/${c._id}`}>
             More details…
           </Button>
         </div>

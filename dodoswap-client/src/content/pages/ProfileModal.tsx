@@ -23,9 +23,7 @@ const ProfileModal: React.FC<ModalProps> = props => {
     //fetch call to submit user profile edits
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-
         let token = localStorage.getItem('boilerToken')
-        console.log()
         // Fetch call to POST data
         fetch(process.env.REACT_APP_SERVER_URL + 'user', {
             method: 'PUT',

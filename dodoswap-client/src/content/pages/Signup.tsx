@@ -69,7 +69,7 @@ const Signup: React.FC<SignupProps> = props => {
     <Container className="center-form">   
       <Grid columns={2} verticalAlign="middle">
         <Grid.Row>
-          <Grid.Column >
+          <Grid.Column width={6} >
             <Logo />
           </Grid.Column>
           <Grid.Column width={2}></Grid.Column>
@@ -97,7 +97,7 @@ const Signup: React.FC<SignupProps> = props => {
                 <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} required/>
                 </Form.Field>
               </Form.Group>
-              <Button type="submit">Sign Me Up!</Button>
+              <Button type="submit" color="yellow">Sign Me Up!</Button>
             </Form>
           </Grid.Column>
         </Grid.Row>

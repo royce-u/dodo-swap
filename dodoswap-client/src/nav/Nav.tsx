@@ -51,7 +51,7 @@ const Nav: React.FC<NavProps> = props => {
           <Dropdown pointing text="Events" id="event">
             <Dropdown.Menu>
               <Dropdown.Item as={Link} to= "/event">All Events</Dropdown.Item>
-              <Dropdown.Item as={Link} to= "/newevent">Add Event</Dropdown.Item>
+              <Dropdown.Item as={Link} to= "/event/new">Add Event</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Menu.Item

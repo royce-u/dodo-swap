@@ -1,6 +1,6 @@
 // Packages
 import React from 'react'
-import { Route, RouteProps } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 // Custom components
 import AddEvent from './pages/AddEvent'
@@ -17,15 +17,13 @@ import EventDetails from './pages/EventDetails'
 interface ContentProps {
   user: Decoded | null,
   updateToken: (newToken: string | null) => void
-
 }
-
 
 
 
 const Content: React.FC<ContentProps> = props => {
   return (
-    <div className="container">
+    <Switch>
       <Route exact path="/" render={
         () => <Home updateToken={props.updateToken} user={props.user} />
       } />
@@ -35,17 +33,17 @@ const Content: React.FC<ContentProps> = props => {
       <Route path="/catalogue" render={
         () => <Catalogue user={props.user}/>
       } />
-      <Route path="/newevent" render={
+      <Route exact path="/event/new" render={
         () => <AddEvent updateToken={props.updateToken} user={props.user}/>
       } />
       <Route path="/event" render={
         () => <Events user={props.user}/>
       } />
-      <Route path="/events/:id" render={
+      <Route path="/event/:id" render={
         () => <EventDetails />
       } />
 
-    </div>
+    </Switch>
   )
 }
 

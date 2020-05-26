@@ -4,6 +4,7 @@ import { UserInterface } from '../models/user'
 import mongoose from 'mongoose'
 
 let db = require('../models')
+
 const router = Router()
 interface RequestInterface extends Request {
     user?: UserInterface

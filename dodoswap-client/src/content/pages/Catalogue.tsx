@@ -1,7 +1,6 @@
 //packages
 import React, { useState, useEffect } from 'react'
-
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Button, Container, Grid, Icon, Image, Card } from 'semantic-ui-react'
 
 
@@ -11,14 +10,11 @@ import { Decoded } from '../../App'
 
 interface CatalogueProps {
     user: Decoded | null
-
 }
 
 const Catalogue: React.FC<CatalogueProps> = props => {
     let [catItems, setCatItems] = useState([])
     let [fetchUser, setFetchUser] = React.useState<String | null>('')
-    // let [fetchWish, setFetchWish] = React.useState<String>('')
-    // let [inventory, setInventory] = React.useState<String>('')
 
 
     const handleWishList = ((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -91,7 +87,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     }, [])
 
     if (props.user) {
-        let display = catItems.map((c: any) => {
+        let display = catItems.slice(0,200).map((c: any) => {
             return (
                 <Grid.Column>
                     <Grid.Row>
@@ -123,15 +119,15 @@ const Catalogue: React.FC<CatalogueProps> = props => {
                         {display}
                     </Grid.Row>
                 </Grid>
-
             </Container>
         )
     }
-    return (
-        <div>
-            <h1>No Token - GO HOME!</h1>
 
-        </div>
+    return (
+        //loading for user 
+        <Container>
+            <Image centered src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB12IXMM.img?h=450&w=799&m=6&q=60&o=f&l=f"/>
+        </Container>
     )
 }
 
