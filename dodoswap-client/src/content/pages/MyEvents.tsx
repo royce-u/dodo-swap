@@ -1,6 +1,6 @@
 //packages
 import React, { FormEvent, useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Container, Grid, Icon, List } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
@@ -49,18 +49,13 @@ const MyEvents: React.FC<MyEventsProps> = props => {
     }, [])
     console.log(myEvents)
 
-    // if (!props.user){
-    //     return null
-    // }
-
     let display = myEvents.map((m: any) => {
         return (
 
             <List.Item key={m._id}>
                 <List.Icon name="calendar alternate" size="large" color="blue" verticalAlign="middle"/>
                 <List.Content>
-                <List.Header as="a">Date: {m.date} ({m.time})</List.Header>
-            
+                <List.Header as={Link} to={`event/${m._id}`}>Date: {m.date} ({m.time})</List.Header>
                 <List.Description>{m.description}</List.Description>
             Max Visitors: {m.maxVisitor}
             </List.Content>

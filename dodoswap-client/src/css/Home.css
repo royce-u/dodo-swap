@@ -18,3 +18,10 @@ body {
     padding: 12px 16px;
     margin: 0 0 -2px;
 }
+h1, .top-nav a, .top-nav:nth-child(1) {
+    color: white !important;
+}
+
+.catLink a:link, catLinks a:visited{
+    color: white !important;
+}

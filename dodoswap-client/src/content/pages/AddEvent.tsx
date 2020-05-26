@@ -76,8 +76,9 @@ const AddEvent: React.FC<NewEventProps> = props => {
 
     return (
         <Container>
-            <h1>Add an Event</h1>
-            <Grid stackable columns={2} container>
+            <h1>Add Event</h1>
+            <Grid stackable columns={2} container verticalAlign='middle'>
+                <Grid.Row></Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
                         <Image src="https://dodo.ac/np/images/thumb/3/36/Timmy_%26_Tommy_NH.png/800px-Timmy_%26_Tommy_NH.png" size="large" />

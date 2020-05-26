@@ -8,6 +8,7 @@ import Catalogue from './pages/Catalogue'
 import Events from './pages/Events'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import Lost from './pages/Lost'
 import { Decoded } from '../App'
 import EventDetails from './pages/EventDetails'
 
@@ -31,17 +32,18 @@ const Content: React.FC<ContentProps> = props => {
         () => <Profile updateToken={props.updateToken} user={props.user} />
       } />
       <Route path="/catalogue" render={
-        () => <Catalogue user={props.user}/>
+        () => <Catalogue user={props.user} />
       } />
       <Route exact path="/event/new" render={
-        () => <AddEvent updateToken={props.updateToken} user={props.user}/>
+        () => <AddEvent updateToken={props.updateToken} user={props.user} />
       } />
       <Route path="/event/:id" render={
-        () => <EventDetails user={props.user} updateToken={props.updateToken}/>
+        () => <EventDetails user={props.user} updateToken={props.updateToken} />
       } />
-          <Route path="/event" render={
-            () => <Events user={props.user}/>
-          } />
+      <Route path="/event" render={
+        () => <Events user={props.user} />
+      } />
+      <Route component={Lost} />
     </Switch>
   )
 }
