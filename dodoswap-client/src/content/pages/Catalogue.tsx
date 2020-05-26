@@ -1,6 +1,6 @@
 //packages
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 
@@ -87,7 +87,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
     }, [])
 
     if (props.user) {
-        let display = catItems.slice(0,20).map((c: any) => {
+        let display = catItems.slice(0,50).map((c: any) => {
             return (
                 <Grid.Column key={c._id}>
                     <Grid.Row>
@@ -114,7 +114,7 @@ const Catalogue: React.FC<CatalogueProps> = props => {
         return (
             <Container>
                 <h1>Catalogue of Items</h1>
-                <Grid stackable relaxed columns={5}>
+                <Grid stackable relaxed columns={5} className="catGrid">
                     <Grid.Row >
                         {display}
                     </Grid.Row>

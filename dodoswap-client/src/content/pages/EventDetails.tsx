@@ -1,6 +1,6 @@
 //packages
 import React, { useState, useEffect} from 'react'
-import {Button, Container} from 'semantic-ui-react'
+import { Button, Container, Grid, Message } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
 import { Redirect, useParams } from 'react-router-dom'

@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+body, html {
+  height: 100%;
+}
 
 
 footer {
@@ -30,4 +33,8 @@ img {
 }
 #catPic {
   margin: 0 auto;
+}
+.catGrid {
+  margin-bottom: 5em !important
+  ;
 }
