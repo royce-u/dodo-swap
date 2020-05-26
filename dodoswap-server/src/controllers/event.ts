@@ -70,47 +70,56 @@ router.post('/', (req: Request, res: Response) => {
 
 //PUT /event (update event when other users join)
 router.put('/', (req: RequestInterface, res: Response) => {
-    console.log("REQ BODY----", req.body)
+    
     // req.body.top5 = req.body.top5 ? (Array.isArray(req.body.top5) ? req.body.top5 : [req.body.top5]) : []
     // let top5 = req.body.top5.map((t: string) => mongoose.Types.ObjectId(t))
     // req.body.toBring = req.body.toBring ? (Array.isArray(req.body.toBring) ? req.body.toBring : [req.body.toBring]) : []
     // let toBring = req.body.toBring.map((t: string) => mongoose.Types.ObjectId(t))
 
-    // // req.body.attendee = {
-    // //     attendeeId: mongoose.Types.ObjectId(req.user ? req.user._id : ""),
-    // //     top5: top5,
-    // //     toBring: toBring
-    // // }
-    // // req.body.event = {
-    // //     events: mongoose.Types.ObjectId(req.user ? req.user._id : ""),
-    // //     top5: top5,
-    // //     toBring: toBring
-    // // }
+    // req.body.attendee = {
+    //     attendeeId: mongoose.Types.ObjectId(req.user ? req.user._id : ""),
+    //     // top5: top5,
+    //     // toBring: toBring
+    // }
+    // req.body.event = {
+    //     events: mongoose.Types.ObjectId(req.user ? req.user._id : ""),
+    //     top5: top5,
+    //     toBring: toBring
+    // }
+    //updated event's attendee's list user that joined
     db.Event.updateOne({ _id: (req.body as { id: string }).id },
         { $addToSet: { attendees: req.body.attendee } })
-        .then((pahhty:any) => {
-            console.log('she made it tho')
-            console.log('pahhhtyID------.', pahhty)
-    //         db.User.findOne({_id:(req.body.attendee) },
-    //         { $push: { events: { _id: (req.body as { pig: string }).pig } }})
-    //             .then((user: UserInterface) => {
-    //                 console.log('made it thru push to events', user)
-    //                 // Reissues token
-    //                 let token: string = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
-    //                     expiresIn: 60 * 60 * 8 //8 hours in seconds
-    //                 })
-    //                 res.send({ token })
+        .then(() => {
+            //added event to user's MyEvents
+            db.User.updateOne({ _id: (req.body.attendee.attendeeId) },
+                {$addToSet: {
+                        events: req.body.id
+                    }
                 })
-    //             .catch((err: Error) => {
-    //                 console.log(err)
-    //                 res.send({ err })
-    //             })
-    //     })
+                .then((updatedUser: UserInterface) => {
+                    //find user & reissue token
+                    db.User.findOne({ _id: (req.body.attendee.attendeeId) })
+                        .then((user: UserInterface) => {
+                            // Reissues token
+                            let token: string = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+                                expiresIn: 60 * 60 * 8 //8 hours in seconds
+                            })
+                            res.send({ token })
+                        })
+                        .catch((err: Error) => {
+                            console.log(err)
+                            res.send({ err })
+                        })
+                })
+                .catch((innErr: Error) => {
+                    console.log(innErr)
+                })
+        })
         .catch((error: Error) => {
             console.log(error)
             res.status(500).send({ message: 'Server Error' })
         })
-        
+
 
 
 })
