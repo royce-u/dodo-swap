@@ -1,5 +1,5 @@
 // Packages
-import React, { FormEvent, useState, useEffect } from 'react'
+import React, { FormEvent, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Decoded } from '../../App'
 import { Button, Form, Input, Menu } from 'semantic-ui-react'
@@ -25,8 +25,6 @@ const Login: React.FC<LoginProps> = props => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     //Send the user sign up data to the server
-    console.log('submit', email, password)
-
     // Fetch call to POST data
     fetch(process.env.REACT_APP_SERVER_URL + 'auth/login', {
       method: 'POST',
@@ -39,10 +37,10 @@ const Login: React.FC<LoginProps> = props => {
       }
     })
       .then(response => {
-        console.log('RESPONSE', response)
         //Handle non-200 responses
         if (!response.ok) {
           setMessage(`${response.status}: ${response.statusText}`)
+          console.log(message)
           return
         }
         //we got a good (200) response, we get the token

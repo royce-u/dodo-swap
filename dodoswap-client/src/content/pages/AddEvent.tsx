@@ -5,7 +5,6 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 //custom components
 import { Decoded } from '../../App'
 import { Redirect } from 'react-router-dom';
-import moment from 'moment'
 
 interface NewEventProps {
     user: Decoded | null,

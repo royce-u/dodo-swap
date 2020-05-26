@@ -8,7 +8,6 @@ import MyInventory from './MyInventory'
 import MyWishList from './MyWishList'
 import ProfileBox from './ProfileBox'
 
-
 //props
 interface ProfileProps {
   user: Decoded | null,
@@ -17,7 +16,6 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = props => {
   let [secretMessage, setSecretMessage] = useState('')
-
 
   useEffect(() => {
     //Grab token from local storage
@@ -30,10 +28,9 @@ const Profile: React.FC<ProfileProps> = props => {
       }
     })
       .then(response => {
-        console.log('Response', response)
-
         if (!response.ok) {
           setSecretMessage('Nice try')
+          console.log(secretMessage)
           return
         }
         //we did get a good response
@@ -47,10 +44,8 @@ const Profile: React.FC<ProfileProps> = props => {
         console.log(err)
         setSecretMessage('No message for you')
       })
-  }, [])
+  },[])
   // console.log("PROPS USER", props.user)
-
-
 
   //User profile panes
   const panes = [
@@ -59,12 +54,10 @@ const Profile: React.FC<ProfileProps> = props => {
     { menuItem: 'My Inventory', render: () => <Tab.Pane><MyInventory /></Tab.Pane> }
   ]
 
-
   //Make sure there is a user before trying to show their info
   if (!props.user) {
     return <Redirect to="/" />
   }
-
 
   return (
     <Container>

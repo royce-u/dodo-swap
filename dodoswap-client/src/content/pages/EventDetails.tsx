@@ -1,10 +1,9 @@
 //packages
-import React, { useState, useEffect, FormEvent } from 'react'
+import React, { useState, useEffect} from 'react'
 
-import {Button, Container, Form} from 'semantic-ui-react'
+import {Button, Container} from 'semantic-ui-react'
 import { Decoded } from '../../App'
 import { Redirect, useParams } from 'react-router-dom'
-
 
 interface EventDetailsProps {
     user?: Decoded | null
@@ -14,11 +13,6 @@ interface EventDetailsProps {
     // {match}: RouteComponentProps<RouteInfo>
     // id: string
 }
-
-// interface EventDeets {
-//     date: string
-//     description: string
-// }
 
 const EventDetails: React.FC<EventDetailsProps> = props => {
     let [message, setMessage] = useState('')
@@ -45,7 +39,6 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         lastName: String,
         pic: String
     })
-
 
     //Button to join event (if not the host)
     const handleJoin = ((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -76,6 +69,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                         setReferRedirect(true)
                     } else {
                         setMessage(`${response.status} ${response.statusText}: ${result.message}`)
+                        console.log(message)
                     }
                 })
             })
@@ -85,15 +79,11 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
             })
         }
     
-    
         if (referRedirect) {
             return(
                 <Redirect to = "/user" />
             )
         }
-        
-
- 
     })
 
     //new feature in react router 5.1 - instead of match props
@@ -131,13 +121,9 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         return null
         // console.log(eventDetails.hostId)
     }
-    // console.log('props.user', props.user._id)
-    // console.log(eventDetails)
-    // console.log(eventDetails.hostId.firstname)
     
     //if user is host - show detail && cancel event button
     //else if user is not host - display join button
-
     //else if maxvisitor == attendees.count show event details & "event closed"
 
     return (

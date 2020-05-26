@@ -50,6 +50,7 @@ const ProfileModal: React.FC<ModalProps> = props => {
                     setReferRedirect(true)
                 } else {
                     setMessage(`${response.status} ${response.statusText}: ${result.message}`)
+                    console.log(message)
                 }
             })
         })

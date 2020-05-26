@@ -1,7 +1,7 @@
 //packages
-import React, { FormEvent, useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import { Container, Grid, Icon, List } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Container, List } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
 

@@ -1,7 +1,7 @@
 //packages
 import React, { useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import { Button, Container, Grid, Icon, Image, Card } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Container, Grid, Icon, Image } from 'semantic-ui-react'
 
 
 
