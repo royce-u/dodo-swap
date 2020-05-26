@@ -42,7 +42,7 @@ const Content: React.FC<ContentProps> = props => {
         () => <Events user={props.user}/>
       } />
       <Route path="/events/:id" render={
-        () => <EventDetails user={props.user}/>
+        () => <EventDetails user={props.user} updateToken={props.updateToken}/>
       } />
 
     </div>
