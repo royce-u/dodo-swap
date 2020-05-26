@@ -34,6 +34,7 @@ const MyWishList:React.FC<MyWishListProps> = props => {
             console.log(err)
         })
     },[])
+    console.log(myWishList)
 
     let display = myWishList.map((w:any) => {
         return(
@@ -56,8 +57,7 @@ const MyWishList:React.FC<MyWishListProps> = props => {
             <Grid columns={2} divided>
               <Grid.Row> 
                 {display}
-              </Grid.Row>
-                 
+              </Grid.Row>  
             </Grid>
         </Container>
     )
