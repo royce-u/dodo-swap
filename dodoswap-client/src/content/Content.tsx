@@ -42,7 +42,6 @@ const Content: React.FC<ContentProps> = props => {
           <Route path="/event" render={
             () => <Events user={props.user}/>
           } />
-
     </Switch>
   )
 }

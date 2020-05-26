@@ -1,6 +1,5 @@
 //packages
 import React, { useState, useEffect} from 'react'
-
 import {Button, Container} from 'semantic-ui-react'
 import { Decoded } from '../../App'
 import { Redirect, useParams } from 'react-router-dom'
@@ -8,16 +7,13 @@ import { Redirect, useParams } from 'react-router-dom'
 interface EventDetailsProps {
     user?: Decoded | null
     updateToken: (newToken: string | null) => void
-
-    // params: string
-    // {match}: RouteComponentProps<RouteInfo>
-    // id: string
 }
 
 const EventDetails: React.FC<EventDetailsProps> = props => {
     let [message, setMessage] = useState('')
-    let [fetchUser, setFetchUser] = React.useState<String | null>('')
+    let [fetchUser, setFetchUser] = useState<String | null>('')
     let [referRedirect, setReferRedirect] = useState(false)
+    let [spotsLeft, setSpotsLeft] = useState<number>(0)
     //actual event details
     const [eventDetails, setEventDetails] = useState({
         date: String,
@@ -65,8 +61,8 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                 .then( result => {
                     if (response.ok) {
                         props.updateToken( result.token )
-                        console.log("NEW TOKEN HERE---", result.token)
                         setReferRedirect(true)
+                        setSpotsLeft(spotsLeft-1)
                     } else {
                         setMessage(`${response.status} ${response.statusText}: ${result.message}`)
                         console.log(message)
@@ -77,12 +73,6 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                 console.log(err)
                 setMessage(`${err.toString()}`)
             })
-        }
-    
-        if (referRedirect) {
-            return(
-                <Redirect to = "/user" />
-            )
         }
     })
 
@@ -113,9 +103,13 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
             .catch(err => {
                 console.log(err)
             })
-    }, [])
+    }, [spotsLeft])
 
-    
+    if (referRedirect) {
+        return(
+            <Redirect to = "/user" />
+        )
+    }
     //null check so we can get props.user to work
     if (!props.user ) {
         return null
@@ -130,16 +124,19 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         <Container>
             <h1>Event Details</h1>
             {/* <p><{eventDetails.hostId.firstName}</p> */}
-            <p>{eventDetails.date}</p>
+            <Message color='teal' attached header="Community Guidelines" />
+            <Message >
+            <Message.Header>Date: {eventDetails.date}</Message.Header>
             <p>{eventDetails.time}</p>
             <p>Max Visitors: {eventDetails.maxVisitor}</p>
-            {/* <p>{eventDetails.attendees}</p> */}
+            <p>Spots Left: {spotsLeft}</p>
+            <p>Hosted by: {hostInfo.userName}</p>
             <p>Island: {hostInfo.islandName}</p>
             <p>Attendees: </p>
             <p>{eventDetails.description}</p>
-
-            <Button onClick={handleJoin} >Join</Button>
-         </Container>
+            <Button onClick={handleJoin} color="blue">Join</Button>
+            </Message>
+        </Container>
     )
 
 }
