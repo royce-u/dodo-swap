@@ -24,6 +24,24 @@ router.get('/', (req: RequestInterface, res: Response) => {
             res.send({ err })
         })
 })
+//GET /events (display user profile page using token then take the user id and get events
+router.get('/events', (req: RequestInterface, res: Response) => {
+    db.User.findOne({_id: (mongoose.Types.ObjectId(req.user ? req.user._id : ""))})
+    .populate('events')
+    .populate('hostId')
+        .then((user: UserInterface) => {
+            console.log("USER", user)
+            // .then(() => {
+            //     db.Event.findOne({})
+            // })
+                res.send({user})
+        })
+        .catch((err: Error) => {
+            console.log("error in finding user", err)
+            res.send({ err })
+        })
+})
+
 //GET /inventory (display user profile page using token then take the user id and get rest of inventory, wishlist and events data)
 router.get('/inventory', (req: RequestInterface, res: Response) => {
     db.User.findOne({_id: (mongoose.Types.ObjectId(req.user ? req.user._id : ""))})
@@ -82,6 +100,7 @@ router.put('/', (req: Request, res: Response) => {
         res.status(500).send({ message: 'Server Error' })
     })
 })
+
 
 
 

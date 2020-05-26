@@ -36,12 +36,12 @@ const Content: React.FC<ContentProps> = props => {
       <Route exact path="/event/new" render={
         () => <AddEvent updateToken={props.updateToken} user={props.user}/>
       } />
-        <Route path="/event/:id" render={
-          () => <EventDetails user={props.user} updateToken={props.updateToken}/>
-        } />
-      <Route path="/event" render={
-        () => <Events user={props.user}/>
+      <Route path="/event/:id" render={
+        () => <EventDetails user={props.user} updateToken={props.updateToken}/>
       } />
+          <Route path="/event" render={
+            () => <Events user={props.user}/>
+          } />
     </Switch>
   )
 }
