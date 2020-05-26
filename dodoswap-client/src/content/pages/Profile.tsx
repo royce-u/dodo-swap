@@ -48,7 +48,7 @@ const Profile: React.FC<ProfileProps> = props => {
         setSecretMessage('No message for you')
       })
   }, [])
-  console.log("PROPS USER", props.user)
+  // console.log("PROPS USER", props.user)
 
 
 

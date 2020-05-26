@@ -32,9 +32,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         islandName: String,
         description: String,
         maxVisitor: Number,
-        // attendees: {
-        //     []
-        // }
+        attendees: Array,
         hostId: String,
         _id: String
     })
@@ -115,7 +113,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                     .then(data => {
                         setEventDetails(data.event)
                         setHostInfo(data.event.hostId)
-                        console.log(hostInfo.nativeFruit)
+                        // console.log(hostInfo.nativeFruit)
 
                     })
                     .catch(innErr => {
@@ -134,7 +132,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
         // console.log(eventDetails.hostId)
     }
     // console.log('props.user', props.user._id)
-    console.log(eventDetails)
+    // console.log(eventDetails)
     // console.log(eventDetails.hostId.firstname)
     
     //if user is host - show detail && cancel event button
@@ -151,6 +149,7 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
             <p>Max Visitors: {eventDetails.maxVisitor}</p>
             {/* <p>{eventDetails.attendees}</p> */}
             <p>Island: {hostInfo.islandName}</p>
+            <p>Attendees: </p>
             <p>{eventDetails.description}</p>
 
             <Button onClick={handleJoin} >Join</Button>
