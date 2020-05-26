@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Container, Grid, Icon, Image } from 'semantic-ui-react'
+import { Button, Card, Container } from 'semantic-ui-react'
 
 //custom components
 import { Decoded } from '../../App'

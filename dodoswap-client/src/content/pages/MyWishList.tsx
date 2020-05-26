@@ -1,6 +1,6 @@
 //packages
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, Header, Image, Table } from 'semantic-ui-react'
+import { Container, Grid, Image } from 'semantic-ui-react'
 
 import { Decoded } from '../../App'
 

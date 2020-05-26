@@ -39,8 +39,8 @@ const Content: React.FC<ContentProps> = props => {
       <Route path="/event" render={
         () => <Events user={props.user}/>
       } />
-      <Route path="/event/:id" render={
-        () => <EventDetails />
+      <Route path="/events/:id" render={
+        () => <EventDetails user={props.user} updateToken={props.updateToken}/>
       } />
 
     </Switch>
