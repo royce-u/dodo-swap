@@ -1,12 +1,15 @@
 {
-  "name": "dodo-swap-server",
+  "name": "dodoswap-server",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm i && node build/index.js",
+    "start": "node build/index.js",
     "tsc": "tsc",
-    "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' index.ts"
+    "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' index.ts", 
+    "postinstall": "npm run build",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
