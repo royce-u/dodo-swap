@@ -62,12 +62,28 @@ Server side
 | GET | * | Catch all page for server errors. |
 
 
+Client side
+| Path | Purpose |
+|------|---------|
+|/| home page |
+| /user | user landing page - includes events, wishlist and inventory, as well as user profile edit |
+| /catalogue | catalogue of all items |
+| /event | event index |
+| /event/new | add new events form |
+| /event/:id | shows specific event details |
 
 
+#### Future features
+
+- Comment section on events
+- Ability to add friends
+- Ability to specify items you would like attendees to bring for catalogue parties
+- Rating system after each event to encourage respectful visitor etiquette
+- Messaging feature
 
 
-
----
+----
+## Shoutouts
 
 Special thanks to the [ACNH API](http://acnhapi.com/) team for putting together such great resources. We were able to leverage the [Google sheets](https://docs.google.com/spreadsheets/d/13d_LAJPlxMa_DubPTuirkIV4DERBMXbrWQsmSh8ReK4/edit#gid=1672309167) of all the items to seed our database.
 
