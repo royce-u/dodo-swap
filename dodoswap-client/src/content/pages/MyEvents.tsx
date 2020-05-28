@@ -46,18 +46,18 @@ const MyEvents: React.FC<MyEventsProps> = props => {
                 console.log(err)
             })
     }, [])
-    // console.log(myEvents)
+    console.log(myEvents)
 
     let display = myEvents.map((m: any) => {
         return (
 
             <List.Item key={m._id}>
-                <List.Icon name="calendar alternate" size="large" color="blue" verticalAlign="middle"/>
+                <List.Icon name="calendar alternate" size="large" color="blue" verticalAlign="middle" />
                 <List.Content>
-                <List.Header as={Link} to={`event/${m._id}`}>Date: {m.date} ({m.time})</List.Header>
-                <List.Description>{m.description}</List.Description>
+                    <List.Header as={Link} to={`event/${m._id}`}>Date: {m.date} ({m.time})</List.Header>
+                    <List.Description>{m.description}</List.Description>
             Max Visitors: {m.maxVisitor}
-            </List.Content>
+                </List.Content>
             </List.Item>
         )
     })
