@@ -181,13 +181,13 @@ const EventDetails: React.FC<EventDetailsProps> = props => {
                                             <Icon name='user outline' /><strong>Host</strong>
                                         </Table.Cell>
                                         <Table.Cell>
-                                        {hostInfo.userName}
+                                        {hostInfo.userName ? hostInfo.userName : hostIdNumber}
                                         </Table.Cell>
                                         <Table.Cell>
                                             <Icon name='map outline' /><strong>Island</strong>
                                         </Table.Cell>
                                         <Table.Cell>
-                                        {hostInfo.islandName}
+                                        {hostInfo.islandName ? hostInfo.islandName : 'No island name yet.'}
                                         </Table.Cell>
                                     </Table.Row>
                                     <Table.Row>

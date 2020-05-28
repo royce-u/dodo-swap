@@ -72,7 +72,7 @@ router.post('/', (req: Request, res: Response) => {
 
 //PUT /event (update event when other users join)
 router.put('/', (req: RequestInterface, res: Response) => {
-
+    console.log('woohooo joining event', req.body)
     // req.body.top5 = req.body.top5 ? (Array.isArray(req.body.top5) ? req.body.top5 : [req.body.top5]) : []
     // let top5 = req.body.top5.map((t: string) => mongoose.Types.ObjectId(t))
     // req.body.toBring = req.body.toBring ? (Array.isArray(req.body.toBring) ? req.body.toBring : [req.body.toBring]) : []
@@ -90,9 +90,10 @@ router.put('/', (req: RequestInterface, res: Response) => {
     // }
     //updated event's attendee's list user that joined
     db.Event.updateOne({ _id: (req.body as { id: string }).id },
-        { 'attendee.attendeeId': { $ne: req.body.attendee.attendeeId } },
-        { $push: { attendees: req.body.attendee } })
-        .then(() => {
+        // { 'attendee.attendeeId': { $ne: req.body.attendee.attendeeId } },
+        { $push: { attendees: req.body.attendee } , unique: true})
+        .then((updatedEvent: EventInterface) => {
+            console.log('this is the even you joined-----', updatedEvent)
             //added event to user's MyEvents
             db.User.updateOne({ _id: (req.body.attendee.attendeeId) },
                 {

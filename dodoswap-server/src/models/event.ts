@@ -48,9 +48,10 @@ let eventSchema: mongoose.Schema = new mongoose.Schema({
     },
     attendees: [
         {
-        attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+        attendeeId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}, 
         top5: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}], 
-        toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
+        toBring: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
+        _id: false
         }
     ], 
     date: String,
