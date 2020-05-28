@@ -70,8 +70,15 @@ const ProfileModal: React.FC<ModalProps> = props => {
     if (!props.user) {
         return null
     }
+  
+    const fruitOptions = [
+        { key: 'apple', text: 'apple', value: 'apple' },
+        { key: 'cherry', text: 'cherry', value: 'cherry' },
+        { key: 'orange', text: 'orange', value: 'orange' },
+        { key: 'peach', text: 'peach', value: 'peach' },
+        { key: 'pear', text: 'pear', value: 'pear' },
 
-
+    ]
     let idee = props.user._id ? props.user._id : undefined
     return (
 
@@ -94,13 +101,7 @@ const ProfileModal: React.FC<ModalProps> = props => {
                         <Form.Input label="Island Name" name="islandName" placeholder={props.user.islandName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIslandName(e.target.value)} required />
                     </Form.Field>
                     <Form.Field>
-                        <Form.Input required label='Native Fruit' control='select' name="nativeFruit" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNativeFruit(e.target.value)}>
-                            <option value='apple'>Apples</option>
-                            <option value='cherry'>Cherries</option>
-                            <option value='orange'>Oranges</option>
-                            <option value='peach'>Peaches</option>
-                            <option value='pear'>Pears</option>
-                        </Form.Input>
+                        <Form.Select required label='Native Fruit' options={fruitOptions} name="nativeFruit" onChange={(e: any) => setNativeFruit(e.target.value)}/>
                     </Form.Field>
                     <Form.Field>
                         <input type="hidden" value={idee} name="id" />

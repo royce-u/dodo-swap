@@ -101,8 +101,6 @@ router.put('/', (req: Request, res: Response) => {
 })
 
 
-
-
 //PUT /user/wishlist (update user's wishlist)
 router.put('/wishlist', (req: Request, res: Response) => {
     console.log("REQ BODY WISHLIST----", req.body)
