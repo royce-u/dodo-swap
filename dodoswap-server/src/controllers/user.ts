@@ -83,6 +83,7 @@ router.get('/edit', (req: RequestInterface, res: Response) => {
 
 //PUT /user/ (update user profile)
 router.put('/', (req: Request, res: Response) => {
+    console.log('UPDATE BODY', req.body)
     db.User.updateOne({ _id: (req.body as{id: string}).id }, req.body)
     .then(() => {
         db.User.findOne({_id: (req.body as{id: string}).id })

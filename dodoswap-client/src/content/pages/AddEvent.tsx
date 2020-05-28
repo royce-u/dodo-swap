@@ -1,6 +1,6 @@
 //packages
 import React, { FormEvent, useState } from 'react'
-import { Button, Container, Form, Grid, Image, Segment } from 'semantic-ui-react'
+import { Button, Container, Form, Grid, Image, Segment, DropdownProps } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 //custom components
 import { Decoded } from '../../App'
@@ -56,6 +56,11 @@ const AddEvent: React.FC<NewEventProps> = props => {
         setRedirect(true)
 
     })
+
+    const handleDropdown = ((e:React.SyntheticEvent, data:any) => {
+        setMaxVisitor(data.value)
+    })
+    
     if (!props.user) {
         return (
             <Redirect to="/" />
@@ -94,7 +99,7 @@ const AddEvent: React.FC<NewEventProps> = props => {
                                         <label>Time:</label>
                                         <TimeInput value={time} onChange={handleChangeTime} name="time" />
                                     </Form.Field>
-                                    <Form.Select fluid label='Visitors' options={options}  onChange={(e: any) => setMaxVisitor(e.target.value)} />
+                                    <Form.Select selection fluid label='Visitors' options={options}  onChange={handleDropdown} name="maxVisitor"/>
                                 </Form.Group>
                                 <Form.Field onChange={(e: any) => sethostDescription(e.target.value)} value={hostDescription} label='Description' control='textarea' rows='3' name="comments" />
                                 <input type="hidden" value={idee} name="hostId" />
