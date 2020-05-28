@@ -71,7 +71,7 @@ router.post('/', (req: Request, res: Response) => {
 
 //PUT /event (update event when other users join)
 router.put('/', (req: RequestInterface, res: Response) => {
-    
+
     // req.body.top5 = req.body.top5 ? (Array.isArray(req.body.top5) ? req.body.top5 : [req.body.top5]) : []
     // let top5 = req.body.top5.map((t: string) => mongoose.Types.ObjectId(t))
     // req.body.toBring = req.body.toBring ? (Array.isArray(req.body.toBring) ? req.body.toBring : [req.body.toBring]) : []
@@ -89,11 +89,13 @@ router.put('/', (req: RequestInterface, res: Response) => {
     // }
     //updated event's attendee's list user that joined
     db.Event.updateOne({ _id: (req.body as { id: string }).id },
-        { $addToSet: { attendees: req.body.attendee } })
+        { 'attendee.attendeeId': { $ne: req.body.attendee.attendeeId } },
+        { $push: { attendees: req.body.attendee } })
         .then(() => {
             //added event to user's MyEvents
             db.User.updateOne({ _id: (req.body.attendee.attendeeId) },
-                {$addToSet: {
+                {
+                    $addToSet: {
                         events: req.body.id
                     }
                 })
@@ -116,13 +118,13 @@ router.put('/', (req: RequestInterface, res: Response) => {
                     console.log(innErr)
                 })
         })
-        .catch((error: Error) => {
-            console.log(error)
-            res.status(500).send({ message: 'Server Error' })
+                .catch((error: Error) => {
+                    console.log(error)
+                    res.status(500).send({ message: 'Server Error' })
+                })
+
+
+
         })
 
-
-
-})
-
-module.exports = router
+    module.exports = router
