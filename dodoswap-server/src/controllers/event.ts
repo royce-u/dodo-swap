@@ -90,8 +90,7 @@ router.put('/', (req: RequestInterface, res: Response) => {
     // }
     //updated event's attendee's list user that joined
     db.Event.updateOne({ _id: (req.body as { id: string }).id },
-        // { 'attendee.attendeeId': { $ne: req.body.attendee.attendeeId } },
-        { $push: { attendees: req.body.attendee } , unique: true})
+        { $addToSet: { attendees: req.body.attendee }})
         .then((updatedEvent: EventInterface) => {
             console.log('this is the even you joined-----', updatedEvent)
             //added event to user's MyEvents
