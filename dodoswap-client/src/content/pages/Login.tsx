@@ -63,7 +63,7 @@ const Login: React.FC<LoginProps> = props => {
   return (
     <Menu.Menu position='right'>
       <Form size={"tiny"} onSubmit={handleSubmit}>
-        <Form.Group className="login-fields" inline>
+        <Form.Group className="-fields" inline>
         <Menu.Item>
           <Input label="Email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}/>
         </Menu.Item>
